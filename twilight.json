@@ -25,12 +25,12 @@
         "filters"
     ],
     "settings": [
-            {
-        "id": "arabybrand-support-card",
-        "type": "static",
-        "format": "description",
-        "value": "<div dir='rtl' style='background:#21636F;border-radius:15px;padding:22px 16px;text-align:center;color:#ffffff'><div style='font-size:20px;font-weight:700;line-height:1.5'>تحتاج مساعدة في تصميم متجرك؟</div><div style='font-size:14px;margin-top:8px;line-height:1.6'>نساعدك تحسّن شكل وأداء متجرك</div></div>"
-         },
+{
+    "id": "arabybrand-support-card",
+    "type": "static",
+    "format": "description",
+    "value": "<div dir='rtl' style='background:#21636F;border-radius:15px;padding:22px 16px;text-align:center;color:#ffffff;box-sizing:border-box'><div style='font-size:20px;font-weight:700;line-height:1.5'>تحتاج مساعدة في تصميم متجرك؟</div><div style='font-size:14px;margin-top:8px;line-height:1.6'>نساعدك تحسّن شكل وأداء متجرك</div><div style='display:flex;direction:rtl;gap:8px;margin-top:22px;width:100%'><a href='https://wa.me/WHATSAPP_NUMBER' target='_blank' rel='noopener noreferrer' style='flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:5px;border:1px solid #5B919B;border-radius:8px;padding:11px 3px;color:#ffffff;text-decoration:none;font-size:12px;white-space:nowrap;box-sizing:border-box'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#67D4E3' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M21 11.5a8.38 8.38 0 0 1-.9 3.8A8.5 8.5 0 0 1 12.5 20a8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8A8.5 8.5 0 1 1 21 11.5Z'/><path d='M9 8.5c.6 2.4 2.1 4 4.5 4.5l1.5-1 2 1.5'/></svg><span>تواصل معنا</span></a><a href='https://wa.me/WHATSAPP_NUMBER' target='_blank' rel='noopener noreferrer' style='flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:5px;border:1px solid #5B919B;border-radius:8px;padding:11px 3px;color:#ffffff;text-decoration:none;font-size:12px;white-space:nowrap;box-sizing:border-box'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z'/><circle cx='12' cy='12' r='3'/></svg><span>استكشف خدماتنا</span></a><a href='https://wa.me/WHATSAPP_NUMBER' target='_blank' rel='noopener noreferrer' style='flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:5px;border:1px solid #5B919B;border-radius:8px;padding:11px 3px;color:#ffffff;text-decoration:none;font-size:12px;white-space:nowrap;box-sizing:border-box'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8A8.5 8.5 0 0 1 21 11.5Z'/></svg><span>شاركنا رأيك</span></a></div></div>"
+},
         {
             "type": "static",
             "format": "title",
