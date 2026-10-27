@@ -26,71 +26,10 @@
     ],
     "settings": [
         {
-            "id": "squar_photo_bg_image_size",
-            "type": "items",
-            "format": "dropdown-list",
-            "label": "طريقة عرض الصور في قسم قائمة عناصر",
-            "description": null,
-            "labelHTML": null,
-            "icon": "sicon-list",
-            "selected": [
-                {
-                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
-                    "value": "contain",
-                    "key": "f4adec13-6e4c-654b-b978-b2807935ced9"
-                }
-            ],
-            "options": [
-                {
-                    "label": "تغطية الصورة كامل المساحة مع المحافظة على أبعاد الصورة (Cover)",
-                    "value": "cover",
-                    "key": "e9c8ea8f-c5c6-234e-935-3bce269afde4"
-                },
-                {
-                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
-                    "value": "contain",
-                    "key": "f4adec13-6e4c-654b-b978-b2807935ced9"
-                }
-            ],
-            "source": "Manual",
-            "required": true
-        },
-        {
-            "id": "product_card_options",
-            "type": "boolean",
-            "format": "switch",
-            "label": "تفعيل  خيارات المنتج في كارت المنتج",
-            "description": null,
-            "labelHTML": null,
-            "icon": "sicon-toggle-off",
-            "value": true,
-            "selected": true,
-            "required": false
-        },
-        {
-            "id": "product_card_options_image",
-            "type": "boolean",
-            "format": "switch",
-            "label": "تفعيل  خيارات المنتج عائمة علي صورة كارت المنتج",
-            "description": null,
-            "labelHTML": null,
-            "icon": "sicon-toggle-off",
-            "value": true,
-            "selected": true,
-            "required": false,
-            "conditions": [
-                {
-                    "id": "product_card_options",
-                    "operation": "=",
-                    "value": true
-                }
-            ]
-        },
-        {
             "type": "static",
             "format": "title",
             "id": "colors_of_our_theme",
-            "value": "<div class='flex-center p-3  text-center font-bold text-lg'   >ألـوان الثـيم</div>",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>المظهر العام والألوان</div>",
             "variant": "h6"
         },
         {
@@ -121,7 +60,7 @@
             "type": "static",
             "format": "title",
             "id": "header_options",
-            "value": "<div class='flex-center p-3  text-center font-bold text-lg'   >خيارات أعلى الصفحة</div>",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>الهيدر | الشريط العلوي والعد التنازلي</div>",
             "variant": "h6"
         },
         {
@@ -129,7 +68,7 @@
             "type": "string",
             "format": "date",
             "inputType": "date",
-            "label": "أضافة عد تنازلي",
+            "label": "تاريخ انتهاء العد التنازلي",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-calendar-date",
@@ -188,7 +127,7 @@
             "id": "header-topnav-text",
             "type": "string",
             "format": "text",
-            "label": "نص أعلى الهيدر",
+            "label": "النص في الشريط العلوي",
             "description": "\"هذا النص لا يظهر في شاشات الجوال \"أدخل نص لا يزيد عن ١٠٠ حرفًا",
             "labelHTML": null,
             "placeholder": "Placeholder text ..",
@@ -203,7 +142,7 @@
             "id": "header-topnav-special-text",
             "type": "string",
             "format": "text",
-            "label": "نص مميز أعلى الهيدر",
+            "label": "النص المميز في الشريط العلوي",
             "description": "\"أدخل نص لا يزيد عن ١٠٠ حرفًا\"",
             "labelHTML": null,
             "placeholder": "Placeholder text ..",
@@ -230,7 +169,7 @@
             "id": "header_topnav_icon_url",
             "type": "string",
             "format": "icon",
-            "label": "أيقونة أعلى الهيدر",
+            "label": "أيقونة رابط الشريط العلوي",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-user-circle",
@@ -242,7 +181,7 @@
             "type": "string",
             "format": "url",
             "inputType": "url",
-            "label": "رابط أعلى الهيدر",
+            "label": "وجهة رابط الشريط العلوي",
             "description": null,
             "labelHTML": null,
             "placeholder": "e.g. https://salla.sa",
@@ -257,7 +196,7 @@
             "type": "string",
             "format": "color",
             "inputType": "color",
-            "label": "لون الأيقونة",
+            "label": "لون أيقونة الشريط العلوي",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-format-fill",
@@ -265,10 +204,17 @@
             "required": false
         },
         {
+            "type": "static",
+            "id": "static-line1",
+            "format": "title",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>الهيدر | الشعار والمظهر</div>",
+            "variant": "h6"
+        },
+        {
             "id": "add_another_logo",
             "type": "boolean",
             "format": "switch",
-            "label": "إضافة لوجو الهوفر",
+            "label": "تفعيل شعار بديل عند تمرير المؤشر",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-toggle-off",
@@ -280,7 +226,7 @@
             "id": "another_logo_img",
             "type": "string",
             "format": "image",
-            "label": "صورة",
+            "label": "صورة الشعار البديل",
             "description": null,
             "labelHTML": null,
             "placeholder": "e.g. https://hostname.com/image.png",
@@ -299,7 +245,7 @@
             "id": "header-hover",
             "type": "boolean",
             "format": "switch",
-            "label": "هوفر الهيدر",
+            "label": "تفعيل تأثير تمرير المؤشر على الهيدر",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-toggle-off",
@@ -333,7 +279,7 @@
         },
         {
             "id": "header_is_sticky",
-            "label": "تثبت القائمة الرئيسية أعلى الصفحة عند التمرير لأسفل",
+            "label": "تثبيت الهيدر عند التمرير",
             "description": "يُنصح بالغاء تفعيلها في حالة وجود عناصر كثيرة في القائمة المنسدلة",
             "type": "boolean",
             "icon": "sicon-toggle-off",
@@ -343,10 +289,19 @@
             "selected": true
         },
         {
+            "id": "search-settings",
+            "type": "static",
+            "format": "title",
+            "label": "القائمة والبحث",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>القائمة والبحث</div>",
+            "variant": "h6",
+            "icon": "sicon-format-text"
+        },
+        {
             "id": "advanced-menu",
             "type": "boolean",
             "format": "switch",
-            "label": "تخصيص منيو متقدم",
+            "label": "تفعيل القائمة المتقدمة",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-toggle-off",
@@ -362,15 +317,6 @@
             "value": "يرجي ملاحظة انه عند أختيار المنيو المتقدم يتم أخذ صور أول ثلاث تصنيفات فرعية وعند أختيار المنيو العادي يتم أخذ صورة كل تصنيف أساسي",
             "variant": "h1",
             "icon": "sicon-format-size"
-        },
-        {
-            "id": "search-settings",
-            "type": "static",
-            "format": "title",
-            "label": "خيارات قائمة البحث",
-            "value": null,
-            "variant": "h1",
-            "icon": "sicon-format-text"
         },
         {
             "id": "trending-search-keywords",
@@ -448,20 +394,107 @@
         {
             "type": "static",
             "id": "static-line3",
-            "format": "line"
+            "format": "title",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>بطاقات المنتجات</div>",
+            "variant": "h6"
+        },
+        {
+            "id": "squar_photo_bg_image_size",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "طريقة عرض الصور في قسم قائمة العناصر",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
+                    "value": "contain",
+                    "key": "f4adec13-6e4c-654b-b978-b2807935ced9"
+                }
+            ],
+            "options": [
+                {
+                    "label": "تغطية الصورة كامل المساحة مع المحافظة على أبعاد الصورة (Cover)",
+                    "value": "cover",
+                    "key": "e9c8ea8f-c5c6-234e-935-3bce269afde4"
+                },
+                {
+                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
+                    "value": "contain",
+                    "key": "f4adec13-6e4c-654b-b978-b2807935ced9"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "id": "product_card_options",
+            "type": "boolean",
+            "format": "switch",
+            "label": "إظهار خيارات المنتج داخل بطاقة المنتج",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-toggle-off",
+            "value": true,
+            "selected": true,
+            "required": false
+        },
+        {
+            "id": "product_card_options_image",
+            "type": "boolean",
+            "format": "switch",
+            "label": "عرض خيارات المنتج فوق صورة البطاقة",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-toggle-off",
+            "value": true,
+            "selected": true,
+            "required": false,
+            "conditions": [
+                {
+                    "id": "product_card_options",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "type": "static",
+            "id": "static-line-32",
+            "format": "title",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>الصفحة الرئيسية | عرض المنتجات</div>",
+            "variant": "h6"
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "وضع عمودي للمنتجات في مربع المنتجات الثابتة في الصفحة الرئيسية",
+            "description": null,
+            "id": "vertical_fixed_products",
+            "format": "switch",
+            "required": false,
+            "value": false,
+            "selected": false
+        },
+        {
+            "type": "boolean",
+            "id": "is_more_button_enabled",
+            "label": "عرض (زر الكل) في الصفحة الرئيسية",
+            "format": "switch"
         },
         {
             "type": "static",
             "format": "title",
             "id": "cart_settings",
-            "value": "<div class='flex-center p-3 text-center font-bold text-lg ' >خيـارات أسفل الصفحة</div>",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>الفوتر والنشرة البريدية</div>",
             "variant": "h6"
         },
         {
             "id": "footer_logo_size",
             "type": "items",
             "format": "dropdown-list",
-            "label": "اختر حجم شعار المتجر أسفل الصفحة",
+            "label": "حجم شعار المتجر في الفوتر",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-keyboard_arrow_down",
@@ -530,20 +563,15 @@
         },
         {
             "type": "static",
-            "id": "static-line5",
-            "format": "line"
-        },
-        {
-            "type": "static",
             "format": "title",
             "id": "cart_settings2",
-            "value": "<div class='flex-center p-3 text-center font-bold text-lg ' >خيـارات صفحة سلة المشتريات</div>",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>السلة وتجربة إتمام الطلب</div>",
             "variant": "h6"
         },
         {
             "type": "boolean",
             "icon": "sicon-toggle-off",
-            "label": "تفعيل مميزات المتجر",
+            "label": "إظهار مميزات المتجر في صفحة السلة",
             "description": null,
             "id": "features_switch_cart",
             "format": "switch",
@@ -555,7 +583,7 @@
             "id": "cart_page_features",
             "type": "collection",
             "format": "collection",
-            "label": "أضف مميزات المتجر",
+            "label": "مميزات المتجر في صفحة السلة",
             "description": "أضف مميزات )التسوق من متجرك",
             "labelHTML": null,
             "item_label": null,
@@ -619,7 +647,7 @@
             "id": "sticky_cart_button",
             "type": "boolean",
             "format": "switch",
-            "label": "تثبيت زر اتمام الطلب اسفل الشاشة في الجوال",
+            "label": "تثبيت زر إتمام الطلب أسفل شاشة الجوال",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-toggle-off",
@@ -638,7 +666,7 @@
         {
             "type": "boolean",
             "id": "cart_icon_choose",
-            "label": "اختيار ايقون السله بنفسك",
+            "label": "تخصيص أيقونة السلة",
             "format": "switch",
             "value": true,
             "selected": false
@@ -647,7 +675,7 @@
             "id": "cart_icon_type",
             "type": "items",
             "format": "dropdown-list",
-            "label": "ايقون السله",
+            "label": "شكل أيقونة السلة",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-list",
@@ -729,57 +757,15 @@
         },
         {
             "type": "static",
-            "id": "static-line-32",
-            "format": "line"
-        },
-        {
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "label": "وضع عمودي للمنتجات في مربع المنتجات الثابتة في الصفحة الرئيسية",
-            "description": null,
-            "id": "vertical_fixed_products",
-            "format": "switch",
-            "required": false,
-            "value": false,
-            "selected": false
-        },
-        {
-            "type": "boolean",
-            "id": "is_more_button_enabled",
-            "label": "عرض (زر الكل) في الصفحة الرئيسية",
-            "format": "switch"
-        },
-        {
-            "type": "static",
-            "id": "static-line1",
-            "format": "line"
-        },
-        {
-            "type": "static",
             "format": "title",
             "id": "single-options",
-            "value": "<div class='flex-center p-3  text-center font-bold text-lg'   >خيارات صفحة المنتج</div>",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>صفحة المنتج | الخيارات العامة</div>",
             "variant": "h6"
         },
         {
-            "id": "newsletter_url_product",
-            "type": "string",
-            "format": "url",
-            "inputType": "url",
-            "label": "رابط التذكير بإتاحة المنتج",
-            "description": "أدخل الرابط المباشر للاشتراك في التذكير بإتاحة المنتج  يظهر فقط عند التفعيل.",
-            "labelHTML": null,
-            "placeholder": "مثال: https://salla.sa",
-            "icon": "sicon-link",
-            "value": "https://s.salla.sa",
-            "required": false,
-            "minLength": 2,
-            "maxLength": "300000000"
-        },
-        {
             "type": "boolean",
             "icon": "sicon-toggle-off",
-            "label": "تفعيل زر اتمام الطلب في صفحة المنتج",
+            "label": "إظهار زر إتمام الطلب في صفحة المنتج",
             "description": null,
             "id": "checkout_enable",
             "format": "switch",
@@ -790,207 +776,7 @@
         {
             "type": "boolean",
             "icon": "sicon-toggle-off",
-            "label": "عرض المنتجات الجزء الجانبي في صفحة المنتج",
-            "description": "عند التفعيل سيتم عرض منتجات  في الجزء الجانبي  لصفحة المنتج",
-            "id": "single_side_products",
-            "format": "switch",
-            "required": false,
-            "value": true,
-            "selected": true
-        },
-        {
-            "id": "single_side_source",
-            "icon": "sicon-t-shirt",
-            "type": "items",
-            "label": "مصدر عرض منتجات الاسلايدر",
-            "description": "اختر الطريقة التي تريد بها جلب المنتجات (من تصنيف، مختارة يدويًا، الأكثر مبيعًا...).",
-            "format": "dropdown-list",
-            "source": "Manual",
-            "options": [
-                {
-                    "key": "categories",
-                    "label": "منتجات من تصنيف",
-                    "value": "categories"
-                },
-                {
-                    "key": "sales",
-                    "label": "الأكثر مبيعاً",
-                    "value": "sales"
-                },
-                {
-                    "key": "latest",
-                    "label": "أحدث المنتجات",
-                    "value": "latest"
-                },
-                {
-                    "key": "selected",
-                    "label": "منتجات مختارة",
-                    "value": "selected"
-                }
-            ],
-            "required": false,
-            "selected": [
-                {
-                    "key": "latest",
-                    "label": "أحدث المنتجات",
-                    "value": "latest"
-                }
-            ],
-            "conditions": [
-                {
-                    "id": "single_side_products",
-                    "operation": "=",
-                    "value": true
-                }
-            ],
-            "multichoice": false
-        },
-        {
-            "id": "categories_side_single",
-            "type": "items",
-            "format": "dropdown-list",
-            "label": "اختيار التصنيف",
-            "description": "اختر التصنيف الذي ترغب بعرض منتجاته.",
-            "icon": "sicon-keyboard_arrow_down",
-            "selected": [],
-            "source": "categories",
-            "multichoice": false,
-            "searchable": true,
-            "required": true,
-            "conditions": [
-                {
-                    "id": "single_side_source",
-                    "operation": "=",
-                    "value": "categories"
-                }
-            ],
-            "value": []
-        },
-        {
-            "id": "products_side_single",
-            "type": "items",
-            "format": "dropdown-list",
-            "label": "اختيار المنتجات يدويًا",
-            "description": "اختر المنتجات التي تريد عرضها بشكل يدوي.",
-            "icon": "sicon-keyboard_arrow_down",
-            "selected": [],
-            "source": "products",
-            "multichoice": true,
-            "searchable": true,
-            "required": false,
-            "conditions": [
-                {
-                    "id": "single_side_source",
-                    "operation": "=",
-                    "value": "selected"
-                }
-            ],
-            "value": []
-        },
-        {
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "label": "تفعيل سلايدر المنتجات في صفحة المنتج",
-            "description": null,
-            "id": "single_products",
-            "format": "switch",
-            "required": false,
-            "value": true,
-            "selected": true
-        },
-        {
-            "id": "single_source",
-            "icon": "sicon-t-shirt",
-            "type": "items",
-            "label": "مصدر عرض منتجات الاسلايدر",
-            "description": "اختر الطريقة التي تريد بها جلب المنتجات (من تصنيف، مختارة يدويًا، الأكثر مبيعًا...).",
-            "format": "dropdown-list",
-            "source": "Manual",
-            "options": [
-                {
-                    "key": "categories",
-                    "label": "منتجات من تصنيف",
-                    "value": "categories"
-                },
-                {
-                    "key": "sales",
-                    "label": "الأكثر مبيعاً",
-                    "value": "sales"
-                },
-                {
-                    "key": "latest",
-                    "label": "أحدث المنتجات",
-                    "value": "latest"
-                },
-                {
-                    "key": "selected",
-                    "label": "منتجات مختارة",
-                    "value": "selected"
-                }
-            ],
-            "required": false,
-            "selected": [
-                {
-                    "key": "latest",
-                    "label": "أحدث المنتجات",
-                    "value": "latest"
-                }
-            ],
-            "conditions": [
-                {
-                    "id": "single_products",
-                    "operation": "=",
-                    "value": true
-                }
-            ],
-            "multichoice": false
-        },
-        {
-            "id": "categories_single",
-            "type": "items",
-            "format": "dropdown-list",
-            "label": "اختيار التصنيف",
-            "description": "اختر التصنيف الذي ترغب بعرض منتجاته.",
-            "icon": "sicon-keyboard_arrow_down",
-            "selected": [],
-            "source": "categories",
-            "multichoice": false,
-            "searchable": true,
-            "required": true,
-            "conditions": [
-                {
-                    "id": "single_source",
-                    "operation": "=",
-                    "value": "categories"
-                }
-            ],
-            "value": []
-        },
-        {
-            "id": "products_single",
-            "type": "items",
-            "format": "dropdown-list",
-            "label": "اختيار المنتجات يدويًا",
-            "description": "اختر المنتجات التي تريد عرضها بشكل يدوي.",
-            "icon": "sicon-keyboard_arrow_down",
-            "selected": [],
-            "source": "products",
-            "multichoice": true,
-            "searchable": true,
-            "required": false,
-            "conditions": [
-                {
-                    "id": "single_source",
-                    "operation": "=",
-                    "value": "selected"
-                }
-            ],
-            "value": []
-        },
-        {
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "label": "تثبيت زر الإضافة والكمية أسفل شاشة الجوال",
+            "label": "تثبيت زر الإضافة للسلة والكمية على الجوال",
             "description": null,
             "id": "sticky_add_to_cart",
             "format": "switch",
@@ -1001,7 +787,7 @@
         {
             "type": "boolean",
             "icon": "sicon-toggle-off",
-            "label": "اظهار الوسوم",
+            "label": "إظهار وسوم المنتج",
             "description": null,
             "id": "show_tags",
             "format": "switch",
@@ -1010,94 +796,9 @@
             "selected": true
         },
         {
-            "id": "slider_background_size",
-            "type": "items",
-            "format": "dropdown-list",
-            "label": "طريقة عرض الصور في سليدر صور المنتج",
-            "description": null,
-            "labelHTML": null,
-            "icon": "sicon-list",
-            "selected": [
-                {
-                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
-                    "value": "contain",
-                    "key": "f4adec13-6e4c-433b-b141-b2807935ced9"
-                }
-            ],
-            "options": [
-                {
-                    "label": "تغطية الصورة كامل المساحة مع المحافظة على أبعاد الصورة (Cover)",
-                    "value": "cover",
-                    "key": "e9c8ea8f-c5c6-438e-9d45-3bce269afde4"
-                },
-                {
-                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
-                    "value": "contain",
-                    "key": "f4adec13-6e4c-433b-b141-b2807935ced9"
-                }
-            ],
-            "source": "Manual",
-            "required": true
-        },
-        {
             "type": "boolean",
             "icon": "sicon-toggle-off",
-            "label": "تكبير الصور في سليدر صور المنتج",
-            "description": "هذه الخاصية تمكنك من تكبير الصورة لتسهل رؤية المزيد من التفاصيل بها",
-            "id": "imageZoom",
-            "format": "switch",
-            "required": false,
-            "value": false,
-            "selected": false
-        },
-        {
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "label": "تفعيل التمرير التلقائي في الاسلايدر",
-            "description": null,
-            "id": "enable_autoplay",
-            "format": "switch",
-            "required": false,
-            "value": true,
-            "selected": true
-        },
-        {
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "label": "عرض المنتجات من نفس الفئة في صفحة المنتج",
-            "description": "عند التفعيل سيتم عرض منتجات من نفس الفئة في الجزء الجانبي  لصفحة المنتج",
-            "id": "show_selected_products",
-            "format": "switch",
-            "required": false,
-            "value": true,
-            "selected": true
-        },
-        {
-            "id": "grid_or_slider_products_page",
-            "label": "تفعيل عرض صور المنتج علي شكل شبكة في صفحة المنتج",
-            "description": "عند التفعيل سيتم عرض صور المنتج علي شكل شبكة بدلاً من السليدر الافتراضي",
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "format": "switch",
-            "required": false,
-            "value": true,
-            "selected": false
-        },
-        {
-            "id": "grid_or_slider_in_mobile",
-            "label": "تفعيل عرض صور المنتج علي شكل سلايدر في شاشة الموبايل",
-            "description": "عند التفعيل سيتم عرض صور المنتج علي شكل سلايدر في شاشة الموبايل بدلاً من الشبكة الافتراضية",
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "format": "switch",
-            "required": false,
-            "value": true,
-            "selected": false
-        },
-        {
-            "type": "boolean",
-            "icon": "sicon-toggle-off",
-            "label": "تفعيل شريط المنتج المتحرك",
+            "label": "تفعيل شريط المنتج الثابت",
             "description": null,
             "id": "sticky_is_true",
             "format": "switch",
@@ -1109,7 +810,7 @@
             "id": "product_pro",
             "type": "items",
             "format": "dropdown-list",
-            "label": "شكل المنتج المتحرك في صفحة المنتج",
+            "label": "تصميم شريط المنتج الثابت",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-list",
@@ -1141,13 +842,94 @@
             "type": "static",
             "format": "title",
             "id": "gallery-options",
-            "value": "<div class='flex-center p-3  text-center font-bold text-lg' > خيارات معرض الصور (صفحة المنتج)</div>",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>صفحة المنتج | طريقة عرض الصور</div>",
+            "variant": "h6"
+        },
+        {
+            "id": "slider_background_size",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "طريقة عرض صور المنتج في السلايدر",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
+                    "value": "contain",
+                    "key": "f4adec13-6e4c-433b-b141-b2807935ced9"
+                }
+            ],
+            "options": [
+                {
+                    "label": "تغطية الصورة كامل المساحة مع المحافظة على أبعاد الصورة (Cover)",
+                    "value": "cover",
+                    "key": "e9c8ea8f-c5c6-438e-9d45-3bce269afde4"
+                },
+                {
+                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
+                    "value": "contain",
+                    "key": "f4adec13-6e4c-433b-b141-b2807935ced9"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "السماح بتكبير صور المنتج",
+            "description": "هذه الخاصية تمكنك من تكبير الصورة لتسهل رؤية المزيد من التفاصيل بها",
+            "id": "imageZoom",
+            "format": "switch",
+            "required": false,
+            "value": false,
+            "selected": false
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "تشغيل سلايدر صور المنتج تلقائيًا",
+            "description": null,
+            "id": "enable_autoplay",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "id": "grid_or_slider_products_page",
+            "label": "عرض صور المنتج كشبكة على الديسكتوب",
+            "description": "عند التفعيل سيتم عرض صور المنتج علي شكل شبكة بدلاً من السليدر الافتراضي",
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": false
+        },
+        {
+            "id": "grid_or_slider_in_mobile",
+            "label": "عرض صور المنتج كسلايدر على الجوال",
+            "description": "عند التفعيل سيتم عرض صور المنتج علي شكل سلايدر في شاشة الموبايل بدلاً من الشبكة الافتراضية",
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": false
+        },
+        {
+            "type": "static",
+            "id": "static-line2",
+            "format": "title",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>صفحة المنتج | معرض الصور الإضافي</div>",
             "variant": "h6"
         },
         {
             "type": "boolean",
             "icon": "sicon-toggle-off",
-            "label": "اضافة معرض صور في صفحة المنتج",
+            "label": "إظهار معرض صور إضافي في صفحة المنتج",
             "description": null,
             "id": "img_in_single",
             "format": "switch",
@@ -1158,7 +940,7 @@
         {
             "type": "boolean",
             "icon": "sicon-toggle-off",
-            "label": "اضافة خلفية ملونة لمعرض الصور في صفحة المنتج",
+            "label": "تفعيل خلفية ملونة للمعرض الإضافي",
             "description": null,
             "id": "bg_gellary",
             "format": "switch",
@@ -1178,7 +960,7 @@
             "type": "string",
             "format": "color",
             "inputType": "color",
-            "label": "لون خلفية معرض الصور في صفحة المنتج",
+            "label": "لون خلفية المعرض الإضافي",
             "description": "اضف لون خلفية لمعرض الصور في صفحة المنتج",
             "labelHTML": null,
             "icon": "sicon-format-fill",
@@ -1230,8 +1012,219 @@
             "type": "static",
             "format": "title",
             "id": "product-features-options",
-            "value": "<div class='flex-center p-3  text-center font-bold text-lg' > مميزات المنتج (صفحة المنتج)</div>",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>صفحة المنتج | المنتجات المقترحة والمميزات</div>",
             "variant": "h6"
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار المنتجات في جانب صفحة المنتج",
+            "description": "عند التفعيل سيتم عرض منتجات  في الجزء الجانبي  لصفحة المنتج",
+            "id": "single_side_products",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "id": "single_side_source",
+            "icon": "sicon-t-shirt",
+            "type": "items",
+            "label": "مصدر المنتجات الجانبية",
+            "description": "اختر الطريقة التي تريد بها جلب المنتجات (من تصنيف، مختارة يدويًا، الأكثر مبيعًا...).",
+            "format": "dropdown-list",
+            "source": "Manual",
+            "options": [
+                {
+                    "key": "categories",
+                    "label": "منتجات من تصنيف",
+                    "value": "categories"
+                },
+                {
+                    "key": "sales",
+                    "label": "الأكثر مبيعاً",
+                    "value": "sales"
+                },
+                {
+                    "key": "latest",
+                    "label": "أحدث المنتجات",
+                    "value": "latest"
+                },
+                {
+                    "key": "selected",
+                    "label": "منتجات مختارة",
+                    "value": "selected"
+                }
+            ],
+            "required": false,
+            "selected": [
+                {
+                    "key": "latest",
+                    "label": "أحدث المنتجات",
+                    "value": "latest"
+                }
+            ],
+            "conditions": [
+                {
+                    "id": "single_side_products",
+                    "operation": "=",
+                    "value": true
+                }
+            ],
+            "multichoice": false
+        },
+        {
+            "id": "categories_side_single",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "تصنيف المنتجات الجانبية",
+            "description": "اختر التصنيف الذي ترغب بعرض منتجاته.",
+            "icon": "sicon-keyboard_arrow_down",
+            "selected": [],
+            "source": "categories",
+            "multichoice": false,
+            "searchable": true,
+            "required": true,
+            "conditions": [
+                {
+                    "id": "single_side_source",
+                    "operation": "=",
+                    "value": "categories"
+                }
+            ],
+            "value": []
+        },
+        {
+            "id": "products_side_single",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "المنتجات الجانبية المختارة يدويًا",
+            "description": "اختر المنتجات التي تريد عرضها بشكل يدوي.",
+            "icon": "sicon-keyboard_arrow_down",
+            "selected": [],
+            "source": "products",
+            "multichoice": true,
+            "searchable": true,
+            "required": false,
+            "conditions": [
+                {
+                    "id": "single_side_source",
+                    "operation": "=",
+                    "value": "selected"
+                }
+            ],
+            "value": []
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار سلايدر المنتجات في صفحة المنتج",
+            "description": null,
+            "id": "single_products",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "id": "single_source",
+            "icon": "sicon-t-shirt",
+            "type": "items",
+            "label": "مصدر منتجات السلايدر",
+            "description": "اختر الطريقة التي تريد بها جلب المنتجات (من تصنيف، مختارة يدويًا، الأكثر مبيعًا...).",
+            "format": "dropdown-list",
+            "source": "Manual",
+            "options": [
+                {
+                    "key": "categories",
+                    "label": "منتجات من تصنيف",
+                    "value": "categories"
+                },
+                {
+                    "key": "sales",
+                    "label": "الأكثر مبيعاً",
+                    "value": "sales"
+                },
+                {
+                    "key": "latest",
+                    "label": "أحدث المنتجات",
+                    "value": "latest"
+                },
+                {
+                    "key": "selected",
+                    "label": "منتجات مختارة",
+                    "value": "selected"
+                }
+            ],
+            "required": false,
+            "selected": [
+                {
+                    "key": "latest",
+                    "label": "أحدث المنتجات",
+                    "value": "latest"
+                }
+            ],
+            "conditions": [
+                {
+                    "id": "single_products",
+                    "operation": "=",
+                    "value": true
+                }
+            ],
+            "multichoice": false
+        },
+        {
+            "id": "categories_single",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "تصنيف منتجات السلايدر",
+            "description": "اختر التصنيف الذي ترغب بعرض منتجاته.",
+            "icon": "sicon-keyboard_arrow_down",
+            "selected": [],
+            "source": "categories",
+            "multichoice": false,
+            "searchable": true,
+            "required": true,
+            "conditions": [
+                {
+                    "id": "single_source",
+                    "operation": "=",
+                    "value": "categories"
+                }
+            ],
+            "value": []
+        },
+        {
+            "id": "products_single",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "منتجات السلايدر المختارة يدويًا",
+            "description": "اختر المنتجات التي تريد عرضها بشكل يدوي.",
+            "icon": "sicon-keyboard_arrow_down",
+            "selected": [],
+            "source": "products",
+            "multichoice": true,
+            "searchable": true,
+            "required": false,
+            "conditions": [
+                {
+                    "id": "single_source",
+                    "operation": "=",
+                    "value": "selected"
+                }
+            ],
+            "value": []
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "عرض منتجات من نفس التصنيف",
+            "description": "عند التفعيل سيتم عرض منتجات من نفس الفئة في الجزء الجانبي  لصفحة المنتج",
+            "id": "show_selected_products",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
         },
         {
             "id": "selling-points",
@@ -1347,10 +1340,32 @@
             "required": false
         },
         {
+            "type": "static",
+            "id": "static-line5",
+            "format": "title",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>صفحة المنتج | إشعار التوفر</div>",
+            "variant": "h6"
+        },
+        {
+            "id": "newsletter_url_product",
+            "type": "string",
+            "format": "url",
+            "inputType": "url",
+            "label": "رابط خدمة إشعار توفر المنتج",
+            "description": "أدخل الرابط المباشر للاشتراك في التذكير بإتاحة المنتج  يظهر فقط عند التفعيل.",
+            "labelHTML": null,
+            "placeholder": "مثال: https://salla.sa",
+            "icon": "sicon-link",
+            "value": "https://s.salla.sa",
+            "required": false,
+            "minLength": 2,
+            "maxLength": "300000000"
+        },
+        {
             "id": "newsletter_sp_view_modal",
             "type": "boolean",
             "format": "switch",
-            "label": "إضافة التواصل عبر البريد الإلكتروني في صفحة المنتج",
+            "label": "إظهار نافذة إشعار توفر المنتج",
             "description": "فعّل هذا الخيار لعرض نموذج تواصل بالبريد الإلكتروني فور دخول الزائر للصفحة",
             "labelHTML": null,
             "icon": "sicon-toggle-off",
@@ -1362,7 +1377,7 @@
             "id": "newsletter_sp_add_image",
             "type": "string",
             "format": "image",
-            "label": "إضافة صورة",
+            "label": "صورة نافذة إشعار التوفر",
             "description": "أضف صورة ليتم عرضها في نموذج التواصل.",
             "labelHTML": null,
             "placeholder": "e.g. https://hostname.com/image.png",
@@ -1381,7 +1396,7 @@
             "id": "newsletter_sp_block_title",
             "type": "string",
             "format": "text",
-            "label": "العنوان الرئيسي",
+            "label": "عنوان نافذة إشعار التوفر",
             "description": "اكتب عنوانًا جذّابًا يعبّر عن محتوى القسم.",
             "value": {
                 "ar": "أعلمني عندما يتوفر المنتج.",
@@ -1400,7 +1415,7 @@
             "id": "newsletter_sp_sub_title",
             "type": "string",
             "format": "text",
-            "label": "العنوان الفرعي",
+            "label": "وصف نافذة إشعار التوفر",
             "description": "اكتب نصًا توضيحيًا مختصرًا يدعم العنوان الرئيسي.",
             "value": {
                 "ar": "أدخل تفاصيلك وكن أول من يعرف عندما يكون المنتج متاحًا.",
@@ -1417,21 +1432,16 @@
         },
         {
             "type": "static",
-            "id": "static-line2",
-            "format": "line"
-        },
-        {
-            "type": "static",
             "format": "title",
             "id": "popup-options",
-            "value": "<div class='flex-center p-3  text-center font-bold text-lg' > خيارات الموديل التسويقي (صفحة المنتج)</div>",
+            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>صفحة المنتج | النافذة التسويقية</div>",
             "variant": "h6"
         },
         {
             "id": "collection_sp_view_modal",
             "type": "boolean",
             "format": "switch",
-            "label": "إضافة موديل تسويقي في صفحة المنتج",
+            "label": "إظهار النافذة التسويقية في صفحة المنتج",
             "description": null,
             "labelHTML": null,
             "icon": "sicon-toggle-off",
@@ -1443,7 +1453,7 @@
             "id": "collection_add_image",
             "type": "string",
             "format": "image",
-            "label": "إضافة صورة",
+            "label": "الصورة الرئيسية للنافذة التسويقية",
             "description": "أضف صورة ليتم عرضها في الموديل التسويقي.",
             "labelHTML": null,
             "placeholder": "e.g. https://hostname.com/image.png",
@@ -1462,7 +1472,7 @@
             "id": "collection_sp_block_title",
             "type": "string",
             "format": "text",
-            "label": "العنوان الرئيسي",
+            "label": "العنوان الرئيسي للنافذة التسويقية",
             "description": "اكتب نصًا توضيحيًا مختصرًا يدعم العنوان الرئيسي.",
             "value": {
                 "ar": "احصل على خصم 10٪ على كل هودي",
@@ -1481,7 +1491,7 @@
             "id": "collection_sp_sub_title",
             "type": "string",
             "format": "text",
-            "label": "العنوان الفرعي",
+            "label": "النص الفرعي للنافذة التسويقية",
             "description": "اكتب نصًا توضيحيًا مختصرًا يدعم العنوان الرئيسي.",
             "value": {
                 "ar": "احصل على أي هودي اليوم واستمتع بخصم 10٪ على أي سويتر.",
@@ -1500,7 +1510,7 @@
             "id": "collection_sp_promo_title",
             "type": "string",
             "format": "text",
-            "label": "العنوان الترويجي",
+            "label": "العنوان الترويجي للنافذة التسويقية",
             "description": "اكتب عنوانًا جذّابًا يعبّر عن محتوى القسم.",
             "value": {
                 "ar": "استمتع بالعرض عبر المجموعة بأكملها!.",
@@ -1519,7 +1529,7 @@
             "id": "collection_categories",
             "type": "items",
             "format": "dropdown-list",
-            "label": "حدد التصنيف الذي سيتم عرض الموديل التسويقي علي منتجاتة في صفحة المنتج",
+            "label": "التصنيفات التي تُعرض فيها النافذة التسويقية",
             "labelHTML": null,
             "icon": "sicon-keyboard_arrow_down",
             "selected": [],
@@ -1541,7 +1551,7 @@
             "id": "collectionn_footer_image",
             "type": "string",
             "format": "image",
-            "label": "إضافة صورة",
+            "label": "الصورة السفلية للنافذة التسويقية",
             "description": "أضف صورة ليتم عرضها في ذيل الموديل.",
             "labelHTML": null,
             "placeholder": "e.g. https://hostname.com/image.png",
@@ -1560,7 +1570,7 @@
             "id": "collection_title",
             "type": "string",
             "format": "text",
-            "label": "اسم التصنيف",
+            "label": "اسم التصنيف داخل النافذة التسويقية",
             "description": "اكتب عنوانًا جذّابًا يعبّر عن محتوى القسم.",
             "value": {
                 "ar": "Hoodies Collection!",
