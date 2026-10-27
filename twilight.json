@@ -288,15 +288,15 @@
             "value": true,
             "selected": true
         },
-        {
-            "id": "search-settings",
-            "type": "static",
-            "format": "title",
-            "label": "القائمة الرئيسية",
-            "value": "<div class='flex-center p-3 text-center font-bold text-lg'>القائمة والبحث</div>",
-            "variant": "h6",
-            "icon": "sicon-format-text"
-        },
+     {
+    "id": "search-settings",
+    "type": "static",
+    "format": "title",
+    "label": "القائمة الرئيسية",
+    "value": "<div class='flex-center p-3 text-center font-bold text-lg'>القائمة الرئيسية</div>",
+    "variant": "h6",
+    "icon": "sicon-format-text"
+},
         {
             "id": "advanced-menu",
             "type": "boolean",
