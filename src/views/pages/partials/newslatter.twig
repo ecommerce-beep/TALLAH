@@ -65,8 +65,29 @@
 		const messages = {
 			required: isRTL ? 'الرجاء إدخال بريد إلكتروني صحيح' : 'Please enter a valid email',
 			invalid: isRTL ? 'صيغة البريد الإلكتروني غير صحيحة' : 'Invalid email format',
-			success: isRTL ? 'تم الاشتراك بنجاح! شكراً لك' : 'Subscription successful! Thank you',
+			// The request is sent in no-cors mode, so the server reply cannot be read: only confirm that it was sent
+			sent: isRTL ? 'تم إرسال طلب الاشتراك. شكراً لك' : 'Your subscription request has been sent. Thank you',
+			unavailable: isRTL ? 'خدمة الاشتراك غير متاحة حالياً' : 'Subscription is currently unavailable',
 			sending: isRTL ? 'جاري الإرسال...' : 'Sending...'
+		};
+
+		// The editor default (https://s.salla.sa) and links back to the current page are not subscription endpoints
+		const isUsableSubscriptionUrl = (value) => {
+			if (!value || !value.trim()) return false;
+
+			let url;
+			try {
+				url = new URL(value, window.location.href);
+			} catch (error) {
+				return false;
+			}
+
+			if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
+
+			const isEditorDefault = url.hostname === 's.salla.sa' && url.pathname === '/' && !url.search;
+			const isCurrentPage = url.origin === window.location.origin && url.pathname === window.location.pathname;
+
+			return !isEditorDefault && !isCurrentPage;
 		};
 
 		// Loop through all forms on the page
@@ -89,6 +110,13 @@
 			form.addEventListener('submit', function (e) {
 				e.preventDefault();
 
+				// Never submit (or report success) when the merchant has not set a real subscription URL
+				if (!isUsableSubscriptionUrl(form.getAttribute('action'))) {
+					console.warn('Newsletter: no valid subscription URL is set in the theme settings, the form was not submitted.');
+					salla.notify.error(messages.unavailable);
+					return;
+				}
+
 				const emailValue = emailInput.value.trim();
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -107,7 +135,7 @@
 					mode: 'no-cors'
 				})
 				.then(() => {
-					salla.notify.success(messages.success);
+					salla.notify.info(messages.sent);
 					form.reset();
 				})
 				.catch(error => {
