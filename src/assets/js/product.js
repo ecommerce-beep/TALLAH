@@ -22,6 +22,7 @@ class Product extends BasePage {
       window.addEventListener("resize", () => this.initImagesZooming());
     }
     this.initproductdetailsFaqs();
+    this.initGalleryReducedMotion();
     this.runningAfter5Seconds();
     this.collections_offer();
   }
@@ -380,6 +381,33 @@ collections_offer() {
 
 
 
+
+  // Autoplay is movement the visitor did not ask for: stop it when the system asks for reduced motion
+  initGalleryReducedMotion() {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sliders = document.querySelectorAll(
+      "salla-slider.details-slider, salla-slider.product-images-slider"
+    );
+
+    sliders.forEach(async (slider) => {
+      await customElements.whenDefined("salla-slider");
+
+      // The Swiper instance is created after the component loads, so wait for it (bounded)
+      let swiper;
+      for (let attempt = 0; attempt < 20 && !swiper; attempt++) {
+        swiper = await slider.sliderInstance?.();
+        swiper || (await new Promise((resolve) => setTimeout(resolve, 250)));
+      }
+
+      // Nothing to do when the slider has no autoplay (setting off or a single image)
+      if (!swiper?.autoplay || !swiper.params.autoplay) return;
+
+      const applyMotionPreference = () =>
+        reducedMotion.matches ? swiper.autoplay.stop() : swiper.autoplay.start();
+      applyMotionPreference();
+      reducedMotion.addEventListener("change", applyMotionPreference);
+    });
+  }
 
   initProductOptionValidations() {
     document

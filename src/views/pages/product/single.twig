@@ -140,10 +140,12 @@
 							slider-config='{
 								"slidesPerView": 1.2,
 								"spaceBetween": 10,
+							{% if theme.settings.get('enable_autoplay') and has_many_images %}
 							"autoplay": {
 									"delay": 3000,
 									"disableOnInteraction": false
 								},
+							{% endif %}
 								"breakpoints": {
 									"768": {
 										"slidesPerView": 1.2,
@@ -191,7 +193,7 @@
                                 type="thumbs" 
                                 loop="false" 
                                 grid-thumbs="false"
-								{% if theme.settings.get("enable_autoplay") %}
+								{% if theme.settings.get("enable_autoplay") and has_many_images %}
 								slider-config='{
 									"autoplay": {
 										"delay": 3000,
