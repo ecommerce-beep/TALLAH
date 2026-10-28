@@ -1192,6 +1192,9 @@ select{
 .mt-auto{
     margin-top: auto;
 }
+.ms-1{
+    margin-left: 0.25rem;
+}
 .line-clamp-1{
     overflow: hidden;
     display: -webkit-box;

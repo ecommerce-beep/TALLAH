@@ -84,6 +84,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
+   * Function to build the price markup of a search suggestion
+   * Follows the price logic used in product-card.js
+   * @param {Object} product - Product returned by salla.product.fetch
+   * @returns {string} - Price HTML, a dash, or an empty string when no valid price exists
+   */
+  function getPriceHtml(product) {
+    const isValidPrice = (value) => Number.isFinite(Number(value)) && Number(value) > 0;
+    // Only validated numbers are passed to salla.money, never raw API text
+    const format = (value) => salla.money(Number(value));
+
+    if (product.is_on_sale) {
+      // Fall back to the regular selling price when sale_price is missing
+      const current = [product.sale_price, product.price].find(isValidPrice);
+
+      if (current !== undefined) {
+        // Show the original price struck through only when it is valid and higher
+        const original = isValidPrice(product.regular_price) && Number(product.regular_price) > Number(current)
+          ? `<span class="line-through ms-1">${format(product.regular_price)}</span>`
+          : '';
+        return `<span class="font-medium text-gray-900">${format(current)}</span>${original}`;
+      }
+    } else if (isValidPrice(product.starting_price)) {
+      return `${salla.lang.get('pages.products.starting_price')} ${format(product.starting_price)}`;
+    } else if (isValidPrice(product.price)) {
+      return format(product.price);
+    }
+
+    // No usable price: follow the store's "show price as dash" setting
+    return salla.config.get('store.settings.product.show_price_as_dash') ? '-' : '';
+  }
+
+  /**
    * Function to render search results in the UI
    * @param {Array} products - List of products to display
    */
@@ -99,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <img src="${product.image.url}" alt="${product.name}" class="w-10 h-10 object-cover " />
           <div>
             <p class="text-sm font-medium">${product.name}</p>
-            <p class="text-xs text-gray-500">${product.price?.price ?? ''}</p>
+            <p class="text-xs text-gray-500">${getPriceHtml(product)}</p>
           </div>
         </div>
       `;
