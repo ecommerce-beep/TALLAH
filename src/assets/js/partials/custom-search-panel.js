@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Only open a suggestion the user highlighted; never pick one automatically
         if (resultsVisible && options[activeIndex]) {
           e.preventDefault();
-          options[activeIndex].click(); // Same navigation as a mouse click
+          options[activeIndex].querySelector('a')?.click(); // Same navigation as a mouse click
         }
         break;
       case 'Escape':
@@ -212,6 +212,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
+   * Function to turn a product url into a link target, only http(s) urls are allowed
+   * @param {string} url - Product url returned by the API
+   * @returns {string} - Absolute url, or an empty string when the value is missing or not http(s)
+   */
+  function getSafeProductUrl(url) {
+    try {
+      const parsed = new URL(url, window.location.href);
+      return parsed.protocol === 'http:' || parsed.protocol === 'https:' ? parsed.href : '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  // Pressing a suggestion must not move the focus out of the input (clicks and new tab opening still work)
+  resultsList.addEventListener('mousedown', (e) => e.preventDefault());
+
+  /**
    * Function to render search results in the UI
    * @param {Array} products - List of products to display
    */
@@ -224,17 +241,21 @@ document.addEventListener('DOMContentLoaded', () => {
       item.id = `custom-search-option-${index}`; // Referenced by aria-activedescendant
       item.setAttribute('role', 'option');
       item.setAttribute('aria-selected', 'false');
-      item.className = 'px-4 py-2 hover:bg-gray-100 cursor-pointer';  // Apply styling
+      item.className = 'hover:bg-gray-100';  // Apply styling (no cursor-pointer: the theme sets pointer-events:none on its children, which would disable the link)
+      // The whole row is a real link (new tab, copy link...). It is not a tab stop: focus stays in the input
       item.innerHTML = `
-        <div class="flex gap-2 items-center space-x-4">
-          <img src="${product.image.url}" alt="${product.name}" class="w-10 h-10 object-cover " />
-          <div>
-            <p class="text-sm font-medium">${product.name}</p>
-            <p class="text-xs text-gray-500">${getPriceHtml(product)}</p>
+        <a class="block px-4 py-2" tabindex="-1">
+          <div class="flex gap-2 items-center space-x-4">
+            <img src="${product.image.url}" alt="${product.name}" class="w-10 h-10 object-cover " />
+            <div>
+              <p class="text-sm font-medium">${product.name}</p>
+              <p class="text-xs text-gray-500">${getPriceHtml(product)}</p>
+            </div>
           </div>
-        </div>
+        </a>
       `;
-      item.onclick = () => window.location.href = product.url; // Redirect to product page on click
+      const safeUrl = getSafeProductUrl(product.url);
+      if (safeUrl) item.firstElementChild.href = safeUrl;
       resultsList.appendChild(item); // Append the item to the results list
     });
 
