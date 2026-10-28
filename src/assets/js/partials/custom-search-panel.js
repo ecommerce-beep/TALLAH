@@ -304,12 +304,17 @@ document.addEventListener('DOMContentLoaded', () => {
       panel.classList.remove('-translate-y-full');
       panel.classList.add('translate-y-0');
     });
+
+    // Focus synchronously (inside the user's click) so mobile browsers can show the keyboard;
+    // preventScroll avoids a page jump while the panel is still sliding in
+    input.focus({ preventScroll: true });
   }
 
   /**
    * Function to close the search panel with animations
    */
   function closeSearchPanel() {
+    input.blur(); // Drop the focus right away so the mobile keyboard closes with the panel
     panel.classList.add('-translate-y-full'); // Slide the panel out of view
     panel.classList.remove('translate-y-0');
     panelWrapper.classList.add('overflow-hidden'); // Show the overlay container
