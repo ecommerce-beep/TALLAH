@@ -8,11 +8,34 @@ import "./partials/custom-menu.js";
 import "./partials/custom-menu-mobile.js";
 import "./partials/custom-top-nav.js";
 
+// The editor default (https://s.salla.sa) and links back to the current page are not subscription endpoints
+function isUsableSubscriptionUrl(value) {
+  if (!value || !value.trim()) return false;
+
+  let url;
+  try {
+    url = new URL(value, window.location.href);
+  } catch (error) {
+    return false;
+  }
+
+  if (url.protocol !== "http:" && url.protocol !== "https:") return false;
+
+  const isEditorDefault =
+    url.hostname === "s.salla.sa" && url.pathname === "/" && !url.search;
+  const isCurrentPage =
+    url.origin === window.location.origin &&
+    url.pathname === window.location.pathname;
+
+  return !isEditorDefault && !isCurrentPage;
+}
+
 class App extends AppHelpers {
   constructor() {
     super();
     window.app = this;
     window.openNewsletterModal = this.openNewsletterModal;
+    window.isUsableSubscriptionUrl = isUsableSubscriptionUrl;
     global.openEyeModel = (id) => {
       import("./partials/eye-model")
         .then((eye) => {
@@ -490,28 +513,6 @@ watchAndAdjustHeader() {
   const form = modal.querySelector("#newsletter-form");
   const emailInput = form.querySelector("input");
   const submitBtn = form.querySelector("button[type='submit']");
-
-  // The editor default (https://s.salla.sa) and links back to the current page are not subscription endpoints
-  const isUsableSubscriptionUrl = (value) => {
-    if (!value || !value.trim()) return false;
-
-    let url;
-    try {
-      url = new URL(value, window.location.href);
-    } catch (error) {
-      return false;
-    }
-
-    if (url.protocol !== "http:" && url.protocol !== "https:") return false;
-
-    const isEditorDefault =
-      url.hostname === "s.salla.sa" && url.pathname === "/" && !url.search;
-    const isCurrentPage =
-      url.origin === window.location.origin &&
-      url.pathname === window.location.pathname;
-
-    return !isEditorDefault && !isCurrentPage;
-  };
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();

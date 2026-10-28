@@ -119,11 +119,15 @@ class Product extends BasePage {
   runningAfter5Seconds() {
     
 
+    // Only out-of-stock products get the popup, and only when the merchant enabled it
+    // and set a real subscription URL (the editor default is not one)
+    const isOutOfStock = ["out", "out-and-notify"].includes(window.status_product);
+    const isPopupEnabled = !["", "0", "false"].includes(String(window.newsletter_sp_view_modal));
     if (
-      window.status_product !== "out"  || window.status_product !=="out-and-notify"
+      !isOutOfStock ||
+      !isPopupEnabled ||
+      !window.isUsableSubscriptionUrl?.(window.newsletter_sp_url)
     ) {
-      console.log("! equal out");
-      
       return;
     }
 
@@ -233,14 +237,26 @@ class Product extends BasePage {
         invalid: isRTL
           ? "صيغة البريد الإلكتروني غير صحيحة"
           : "Invalid email format",
-        success: isRTL
-          ? "تم الاشتراك بنجاح! شكراً لك"
-          : "Subscription successful! Thank you",
+        // The request is sent in no-cors mode, so the reply cannot be read: only confirm that it was sent
+        sent: isRTL
+          ? "تم إرسال طلبك. شكراً لك"
+          : "Your request has been sent. Thank you",
+        unavailable: isRTL
+          ? "الخدمة غير متاحة حالياً"
+          : "This service is currently unavailable",
         sending: isRTL ? "جاري الإرسال..." : "Sending...",
       };
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
+
+        // Never submit (or report success) when no real URL is configured
+        if (!window.isUsableSubscriptionUrl?.(form.getAttribute("action"))) {
+          console.warn("Newsletter: no valid subscription URL is configured, the form was not submitted.");
+          salla.notify.error(messages.unavailable);
+          return;
+        }
+
         const emailValue = emailInput.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -257,9 +273,12 @@ class Product extends BasePage {
           mode: "no-cors",
         })
           .then(() => {
-            salla.notify.success(messages.success);
+            salla.notify.info(messages.sent);
             form.reset();
             closeModal();
+          })
+          .catch(() => {
+            salla.notify.error(messages.unavailable);
           })
           .finally(() => {
             submitBtn.disabled = false;
