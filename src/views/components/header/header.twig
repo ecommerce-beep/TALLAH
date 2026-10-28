@@ -210,7 +210,7 @@ Global Variables (from Theme)
 						<div
 							class="flex flex-row items-center gap-1">
 							{# Countdown Timer #}
-							<div id="countdown" data-countdown-target="{{ countdown_target }}" style="background: {{ countdown_bg }}; color: {{ countdown_text }};" class="flex h-[22px] px-[12px] py-[10px] justify-center items-center gap-[4px] rounded-lg lg:flex lg:h-[22px] lg:py-[4px] lg:px-4 lg:gap-2">
+							<div id="countdown" data-countdown-target="{{ countdown_target }}" style="{{ countdown_target ? '' : 'display: none; ' }}background: {{ countdown_bg }}; color: {{ countdown_text }};" class="flex h-[22px] px-[12px] py-[10px] justify-center items-center gap-[4px] rounded-lg lg:flex lg:h-[22px] lg:py-[4px] lg:px-4 lg:gap-2">
 								<div class="flex items-baseline gap-0.5">
 									<span id="cd-days" class="text-sm font-bold">0</span>
 									<span class="text-xs">
