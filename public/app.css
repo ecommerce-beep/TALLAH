@@ -1153,6 +1153,9 @@ select{
 .mr-2{
     margin-right: 0.5rem;
 }
+.ms-1{
+    margin-left: 0.25rem;
+}
 .mt-1{
     margin-top: 0.25rem;
 }
@@ -1191,9 +1194,6 @@ select{
 }
 .mt-auto{
     margin-top: auto;
-}
-.ms-1{
-    margin-left: 0.25rem;
 }
 .line-clamp-1{
     overflow: hidden;
@@ -34935,6 +34935,7 @@ input[type=radio].sr-only:checked ~ div.landing-page > header:before {
 }
 .buy_now salla-add-product-button .s-add-product-button-main .s-add-product-button-mini-checkout {
   width: 100%;
+  --salla-fast-checkout-button-height: 48px;
 }
 .single .single-product-slider .swiper.s-slider-container {
   padding: 16px 12px !important;

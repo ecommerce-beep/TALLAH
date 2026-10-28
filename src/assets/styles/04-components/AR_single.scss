@@ -883,6 +883,8 @@ salla-add-product-button{
        }
        .s-add-product-button-mini-checkout{
         width: 100%;
+        // Match the 48px Add to Cart button and quantity input (the widget only supports height/width/radius variables)
+        --salla-fast-checkout-button-height: 48px;
        }
       }
     }
