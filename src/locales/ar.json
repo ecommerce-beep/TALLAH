@@ -67,5 +67,9 @@
     "newsletter_title": "سجّلي بريدك الإلكتروني واحصلي على آخر الأخبار والعروض الخاصة ",
     "newsletter_input_placeholder": "أدخل بريدك الالكتروني",
     "newsletter_button": "اشتراك"
+  },
+  "hero": {
+    "pause_autoplay": "إيقاف الحركة التلقائية",
+    "resume_autoplay": "استئناف الحركة التلقائية"
   }
 }

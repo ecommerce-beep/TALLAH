@@ -1,8 +1,9 @@
+{% set has_many_banners = component.banner|length > 1 %}
 <section class="AR-slider-hero-section AR-slider-hero-section-{{position}}">
 	<div class="wrapper">
 		<div class="relative">
 			{# banner #}
-			<salla-slider id="sub-banner-slider-{{position}}" class="subbanner-slider" auto-play="true" loop="true"
+			<salla-slider id="sub-banner-slider-{{position}}" class="subbanner-slider" {% if has_many_banners %}auto-play="true" {% endif %}loop="true"
 				show-controls="false" type="carousel" slider-config='{
     "parallax": true,
     "pagination": {
@@ -11,11 +12,13 @@
       "clickable": true
     },
     "spaceBetween": 0,
+    {% if has_many_banners %}
     "autoplay": {
       "delay": 2000,
       "disableOnInteraction": false,
       "pauseOnMouseEnter": true
     }, 
+    {% endif %}
     "lazy": true, 
     "speed": 1000,
     "loop": true
@@ -66,6 +69,16 @@
 			</salla-slider>
 			<div class="swiper-pagination !bottom-8 justify-center gap-2 !absolute items-center m-0 flex !w-1/4 !left-1/2 -translate-x-1/2">
 			</div>
+			{# Pause/play for the automatic slide change (WCAG 2.2.2). Shown by home.js once the slider is ready #}
+			{% if has_many_banners %}
+			<button type="button" class="hero-autoplay-toggle" hidden
+				aria-label="{{ trans('hero.pause_autoplay') }}"
+				data-label-pause="{{ trans('hero.pause_autoplay') }}"
+				data-label-play="{{ trans('hero.resume_autoplay') }}">
+				<svg class="icon-pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg>
+				<svg class="icon-play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false" hidden><path d="M4 2.5v11a1 1 0 0 0 1.5.86l9-5.5a1 1 0 0 0 0-1.72l-9-5.5A1 1 0 0 0 4 2.5z"/></svg>
+			</button>
+			{% endif %}
 
 		</div>
 	</div>
@@ -142,5 +155,27 @@
 
 	.carousel-slider .swiper:where([dir="rtl"], [dir="rtl"] *) {
 		padding-left: 0;
+	}
+
+	.AR-slider-hero-section .hero-autoplay-toggle {
+		position: absolute;
+		z-index: 6;
+		bottom: 1.5rem;
+		inset-inline-end: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border: 0;
+		border-radius: 9999px;
+		background: rgba(0, 0, 0, 0.5);
+		color: #fff;
+		cursor: pointer;
+	}
+
+	.AR-slider-hero-section .hero-autoplay-toggle[hidden],
+	.AR-slider-hero-section .hero-autoplay-toggle [hidden] {
+		display: none;
 	}
 </style>
