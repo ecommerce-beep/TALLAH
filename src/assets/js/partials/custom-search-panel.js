@@ -47,11 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
    * @param {string} val - The search query term
    */
   function search(val) {
+    // Prevent duplicate API requests only while the same query is loading or its results are still visible
+    const resultsVisible = !resultsContainer.classList.contains('hidden');
+    if (val === lastQuery && (loading || resultsVisible)) return;
+
     noResults.style.display = 'none'; // Hide no-results message initially
     loading = true; // Set loading state to true
-
-    // Prevent duplicate API requests if the query is the same as the last one
-    if (val === lastQuery) return;
     lastQuery = val;
 
     // Fetch the products using the search query
@@ -70,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
         salla.event.emit('Products Searched', val);
       })
       .catch(err => {
-        
-        
+        lastQuery = ''; // Allow the same query to be retried after a failed request
+
         // Handle errors other than duplicate query
         if (err !== 'Query is same as previous one!') {
           resultsList.innerHTML = '';  // Clear the results list
