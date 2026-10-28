@@ -5,7 +5,7 @@
 			<div class="banner-height md:w-1/2 w-full banner banner-{{loop.index}}  flex flex-col items-start justify-end relative md:py-6 py-4 px-4 overflow-hidden">
 				
 				{% if not item.button_text %}
-					<a class="w-full h-full absolute inset-0 z-[5]" href="{{item.url}}"></a>
+					{% set link_label = (item.block_title ?: item.subtext)|striptags|trim %}<a class="w-full h-full absolute inset-0 z-[5]" href="{{item.url}}"{% if link_label %} aria-label="{{ link_label|e('html_attr') }}"{% endif %}></a>
 				{% endif %}
 
 				<div class="content-wrapper content-wrapper-{{loop.index}} text-start m-0 h-full flex flex-col items-start justify-end sm:gap-4 gap-2 relative z-2">

@@ -8,7 +8,7 @@
 #}
 <section class="s-block s-block--fixed-banner wide-placeholder">
     <div class="container">
-        <a href="{{ url }}" class="banner banner--fixed overflow-hidden" aria-label="Banner {{ image.alt }}">
+        <a href="{{ url }}" class="banner banner--fixed overflow-hidden">
 			{% if position == 0 %}
 				<img width="1200" height="300" src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : 'fixed banner' }}" fetchpriority="high"/>
 			{% else %}

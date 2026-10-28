@@ -28,7 +28,7 @@
 						<div class="banner banner-{{loop.index}} flex flex-col relative md:h-[90vh] h-[100svh] md:px-4 px-2 py-16 overflow-hidden">
 
 							{% if not item.button_text %}
-							<a class="w-full h-full absolute inset-0 z-[5]" href="{{item.url}}"></a>
+							{% set link_label = (item.block_title ?: item.subtext)|striptags|trim %}<a class="w-full h-full absolute inset-0 z-[5]" href="{{item.url}}"{% if link_label %} aria-label="{{ link_label|e('html_attr') }}"{% endif %}></a>
 							{% endif %}
 
 							<div class="text-wrapper h-full flex flex-col {{ item.items_alignment == ['center'] ? 'text-center items-center' : item.items_alignment == ['start'] ? 'text-start items-start' : 'text-end items-end' }} {{ item.items_alignment_vertical == ['start'] ? 'justify-start' : item.items_alignment_vertical == ['end'] ? 'justify-end' : 'justify-center' }} mx-auto relative z-2 container">

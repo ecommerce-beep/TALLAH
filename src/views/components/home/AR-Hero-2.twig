@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="banner flex flex-col items-center justify-center relative md:h-[90vh] h-[100svh] py-6 md:px-4 px-2 overflow-hidden">
             {% if not component.button_text %}
-                <a class="w-full h-full absolute inset-0 z-[5]" href="{{component.url}}"></a>
+                {% set link_label = (component.block_title ?: component.subtext)|striptags|trim %}<a class="w-full h-full absolute inset-0 z-[5]" href="{{component.url}}"{% if link_label %} aria-label="{{ link_label|e('html_attr') }}"{% endif %}></a>
             {% endif %}
 
             {% set alignment = component.items_alignment.value ?? component.items_alignment ?? "center" %}

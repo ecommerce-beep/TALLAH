@@ -337,7 +337,7 @@ const COLOR_LABEL = isArabic ? "اللون" : "Color";
         <div class="${
           !this.fullImage ? "s-product-card-image" : "s-product-card-image-full"
         }">
-         <a href="${this.product?.url}" class="product-flip-wrapper">
+         <a href="${this.product?.url}" class="product-flip-wrapper"${this.product?.image?.alt ? '' : ` aria-label="${String(this.product?.name ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"`}>
   <div class="product-flip-inner ${this.hasSecondImage ? 'has-flip' : ''}">
 
             <img
@@ -368,7 +368,7 @@ const COLOR_LABEL = isArabic ? "اللون" : "Color";
         </a>
           ${
             this.fullImage
-              ? `<a href="${this.product?.url}" aria-label=${this.product.name} class="s-product-card-overlay"></a>`
+              ? `<a href="${this.product?.url}" aria-label="${String(this.product?.name ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" class="s-product-card-overlay"></a>`
               : ""
           }
          ${
