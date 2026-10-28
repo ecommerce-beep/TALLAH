@@ -3,6 +3,7 @@
     "header": {
       "cart": "My Cart",
       "search_label": "Search",
+      "open_search": "Open Search",
       "no_results": "No Results Found",
       "trending": "Trending",
       "featured_categories": "Featured Categories",

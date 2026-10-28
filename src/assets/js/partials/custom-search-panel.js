@@ -306,9 +306,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
+   * Function to reflect the panel state on every search button (desktop and mobile headers)
+   * @param {boolean} expanded - Whether the search panel is open
+   */
+  function setToggleExpanded(expanded) {
+    toggleBtns.forEach((btn) => btn.setAttribute('aria-expanded', String(expanded)));
+  }
+
+  /**
    * Function to open the search panel with animations
    */
   function openSearchPanel() {
+    setToggleExpanded(true);
     // Close mobile menu before opening the search panel
     document.dispatchEvent(new CustomEvent("closeMobileMenu"));
 
@@ -335,6 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Function to close the search panel with animations
    */
   function closeSearchPanel() {
+    setToggleExpanded(false);
     input.blur(); // Drop the focus right away so the mobile keyboard closes with the panel
     panel.classList.add('-translate-y-full'); // Slide the panel out of view
     panel.classList.remove('translate-y-0');

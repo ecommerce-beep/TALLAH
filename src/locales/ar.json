@@ -3,6 +3,7 @@
     "header": {
       "cart": "سلتي",
       "search_label": "بحث",
+      "open_search": "فتح البحث",
       "no_results": "لا توجد نتائج",
       "trending": "كلمات بحث رائجة",
       "featured_categories": "فئات شائعة",
