@@ -27808,9 +27808,14 @@ img {
   max-width: 100%;
 }
 a:focus {
-  outline: none;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+:where(a, button, summary, [role=button], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid #414042;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #fff;
 }
 ul,
 li {
@@ -29925,6 +29930,10 @@ input[type=radio].sr-only:checked ~ div#nav-cart span {
 }
 .copyright-text p a:hover{
     color: var(--color-background);
+}
+.mc-embedded-subscribe-form .mce-EMAIL:focus-visible {
+  outline: 2px solid var(--color-background);
+  outline-offset: 2px;
 }
 .localize button span:nth-child(2) {
   font-size: 25px;

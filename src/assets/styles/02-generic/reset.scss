@@ -44,8 +44,16 @@ img {
 }
 
 a:focus {
-  outline: none;
   text-decoration: none;
+}
+
+// Keyboard focus indicator. :focus-visible does not match mouse clicks, so only keyboard users see it.
+// The white gap (box-shadow) keeps the brand colored outline readable on dark backgrounds too.
+// :where() keeps this rule weak, so components with their own focus styles still win.
+:where(a, button, summary, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #fff;
 }
 
 ul,

@@ -107,3 +107,9 @@
     }
   }
 }
+
+// The footer newsletter field has no border and no ring, so give keyboard focus a visible outline
+.mc-embedded-subscribe-form .mce-EMAIL:focus-visible {
+  outline: 2px solid var(--color-background);
+  outline-offset: 2px;
+}
