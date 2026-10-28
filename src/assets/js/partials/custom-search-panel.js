@@ -22,6 +22,101 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastQuery = '';  // Store the last searched term to avoid duplicate requests
   let loading = false; // Flag to manage loading state
   let debounceTimer;   // Timer to manage debounced search input
+  let activeIndex = -1; // Index of the suggestion highlighted with the keyboard (-1 means none)
+
+  // Combobox/listbox semantics: the input keeps focus and exposes the highlighted suggestion via aria-activedescendant
+  input.setAttribute('role', 'combobox');
+  input.setAttribute('aria-autocomplete', 'list');
+  input.setAttribute('aria-haspopup', 'listbox');
+  input.setAttribute('aria-controls', resultsList.id);
+  input.setAttribute('aria-expanded', 'false');
+  resultsList.setAttribute('role', 'listbox');
+  if (input.placeholder) resultsList.setAttribute('aria-label', input.placeholder);
+
+  /**
+   * Function to get the suggestions currently rendered in the list
+   */
+  function getOptions() {
+    return resultsList.querySelectorAll('[role="option"]');
+  }
+
+  /**
+   * Function to highlight a suggestion and expose it to assistive technologies
+   * @param {number} index - Index of the suggestion to highlight, or -1 to clear the highlight
+   */
+  function setActive(index) {
+    const options = getOptions();
+
+    options.forEach((option, i) => {
+      const isActive = i === index;
+      option.classList.toggle('bg-gray-100', isActive);
+      option.setAttribute('aria-selected', String(isActive));
+    });
+
+    activeIndex = index;
+
+    if (index >= 0 && options[index]) {
+      input.setAttribute('aria-activedescendant', options[index].id);
+      options[index].scrollIntoView({ block: 'nearest' }); // Keep the highlighted suggestion visible in the scrollable list
+    } else {
+      input.removeAttribute('aria-activedescendant');
+    }
+  }
+
+  /**
+   * Function to keep aria-expanded in sync with the visibility of the suggestions
+   */
+  function syncExpanded() {
+    const expanded = !resultsContainer.classList.contains('hidden') && getOptions().length > 0;
+    input.setAttribute('aria-expanded', String(expanded));
+  }
+
+  // Whenever the results are shown or hidden (typing, outside click, closing the panel), sync ARIA and drop the highlight
+  new MutationObserver(() => {
+    syncExpanded();
+    if (resultsContainer.classList.contains('hidden')) setActive(-1);
+  }).observe(resultsContainer, { attributes: true, attributeFilter: ['class'] });
+
+  // Typing changes the query, so any previous highlight no longer applies
+  input.addEventListener('input', () => setActive(-1));
+
+  // Keyboard support: ArrowDown/ArrowUp move the highlight, Enter opens it, Escape closes the suggestions and then the panel
+  input.addEventListener('keydown', (e) => {
+    if (e.isComposing) return; // Do not interfere with text composition
+
+    const options = getOptions();
+    const resultsVisible = !resultsContainer.classList.contains('hidden');
+
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowUp': {
+        if (!resultsVisible || options.length === 0) return;
+        e.preventDefault(); // Keep the caret from jumping inside the input
+
+        const step = e.key === 'ArrowDown' ? 1 : -1;
+        // From "nothing highlighted", ArrowDown goes to the first suggestion and ArrowUp to the last one
+        const next = activeIndex === -1
+          ? (step === 1 ? 0 : options.length - 1)
+          : (activeIndex + step + options.length) % options.length;
+        setActive(next);
+        break;
+      }
+      case 'Enter':
+        // Only open a suggestion the user highlighted; never pick one automatically
+        if (resultsVisible && options[activeIndex]) {
+          e.preventDefault();
+          options[activeIndex].click(); // Same navigation as a mouse click
+        }
+        break;
+      case 'Escape':
+        if (resultsVisible) {
+          resultsContainer.classList.add('hidden'); // First Escape only closes the suggestions
+        } else {
+          document.dispatchEvent(new CustomEvent('closeSearchPanel')); // Next Escape closes the whole panel
+        }
+        break;
+    }
+  });
 
   // Event listener for search input, implementing debounce to optimize API calls
   input.addEventListener('input', (e) => {
@@ -124,8 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
     resultsList.innerHTML = ''; // Clear any previous results
 
     // Loop through each product and create a list item
-    products.forEach(product => {
+    products.forEach((product, index) => {
       const item = document.createElement('li');
+      item.id = `custom-search-option-${index}`; // Referenced by aria-activedescendant
+      item.setAttribute('role', 'option');
+      item.setAttribute('aria-selected', 'false');
       item.className = 'px-4 py-2 hover:bg-gray-100 cursor-pointer';  // Apply styling
       item.innerHTML = `
         <div class="flex gap-2 items-center space-x-4">
@@ -142,6 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resultsContainer.classList.remove('hidden'); // Show results container
     noResults.classList.add('hidden'); // Hide no results message
+    setActive(-1); // New results start without a highlighted suggestion
+    syncExpanded();
   }
 
   /**
@@ -151,6 +251,8 @@ document.addEventListener('DOMContentLoaded', () => {
     resultsList.innerHTML = ''; // Clear any previous results
     noResults.style.display = 'block'; // Show the "No Results" message
     resultsContainer.classList.remove('hidden'); // Ensure results container is visible
+    setActive(-1);
+    syncExpanded();
   }
 
   // Close the search dropdown when clicking outside of the results or input
