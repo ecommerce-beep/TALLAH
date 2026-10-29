@@ -105,17 +105,99 @@ class Product extends BasePage {
         button: "إرسال",
         cancel: "إلغاء",
         email: "البريد الإلكتروني",
-        dont_remind_me_again: "لا تُذكرني مرة أخرى"
+        dont_remind_me_again: "لا تُذكرني مرة أخرى",
+        close: "إغلاق",
+        notify_dialog: "إشعار عند توفر المنتج",
+        offer_dialog: "عرض خاص"
       },
       en: {
         placeholder: "Enter your email address",
         button: "Send",
         cancel: "Cancel",
         email: "Email",
-        dont_remind_me_again: "Don’t remind me again"
+        dont_remind_me_again: "Don’t remind me again",
+        close: "Close",
+        notify_dialog: "Notify me when available",
+        offer_dialog: "Special offer"
       },
     };
     return messages[lang][key];
+  }
+
+  /**
+   * Dialog behavior shared by the popups created in this file (they are plain divs, so nothing manages them for the visitor):
+   * dialog semantics and name, focus moved inside, Tab kept inside (Shift+Tab too), Escape to close, focus returned on close.
+   * One keydown listener lives only while the dialog is open, and only the topmost open dialog reacts when several are open.
+   * @returns {Function} release - call it when the dialog closes (safe to call more than once)
+   */
+  openAccessibleDialog(modal, { titleId, descriptionId, fallbackLabel, initialFocus, requestClose }) {
+    const opener = document.activeElement;
+    const stack = (Product.openDialogs = Product.openDialogs || []);
+
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    // The title is merchant text and can be empty: then fall back to a translated name
+    if (document.getElementById(titleId)?.textContent.trim()) {
+      modal.setAttribute("aria-labelledby", titleId);
+    } else {
+      modal.setAttribute("aria-label", fallbackLabel);
+    }
+    if (descriptionId && document.getElementById(descriptionId)?.textContent.trim()) {
+      modal.setAttribute("aria-describedby", descriptionId);
+    }
+
+    const getFocusable = () =>
+      Array.from(
+        modal.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => el.getClientRects().length > 0);
+
+    const onKeydown = (e) => {
+      if (stack[stack.length - 1] !== modal) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        requestClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const items = getFocusable();
+      if (items.length === 0) {
+        e.preventDefault();
+        return;
+      }
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (!modal.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    stack.push(modal);
+    document.addEventListener("keydown", onKeydown);
+    (modal.querySelector(initialFocus) || getFocusable()[0])?.focus({ preventScroll: true });
+
+    let released = false;
+    return () => {
+      if (released) return;
+      released = true;
+      document.removeEventListener("keydown", onKeydown);
+      const index = stack.indexOf(modal);
+      if (index !== -1) stack.splice(index, 1);
+      // Give the focus back to what had it before, if it is still on the page
+      if (opener && opener !== document.body && document.contains(opener)) {
+        opener.focus({ preventScroll: true });
+      }
+    };
   }
   runningAfter5Seconds() {
     
@@ -148,14 +230,14 @@ class Product extends BasePage {
       <div class="w-[70px] h-[70px] mx-auto">
         <img src="${add_image}" alt="" class="w-full h-auto"/>
       </div>
-        <button id="close-modal" 
+        <button id="close-modal" type="button" aria-label="${this.getLocalizedMessage("close")}" 
           class="absolute top-3 flex items-center justify-center right-3 font-bold w-[24px] h-[24px]  text-[#71717B] transition">
-          <i class="sicon-cancel text-[16px] font-bold"></i>
+          <i class="sicon-cancel text-[16px] font-bold" aria-hidden="true"></i>
         </button>
 
         <div class="text-center">
-          <h2 class="text-primary mb-1 font-semibold text-lg leading-7 tracking-normal text-center align-middle">${newsletter_sp_block_title}</h2>
-          <p class="text-[#71717B] font-medium text-sm leading-5 tracking-wide text-center align-middle">${newsletter_sp_sub_title}</p>
+          <h2 id="newsletter_sp-title" class="text-primary mb-1 font-semibold text-lg leading-7 tracking-normal text-center align-middle">${newsletter_sp_block_title}</h2>
+          <p id="newsletter_sp-description" class="text-[#71717B] font-medium text-sm leading-5 tracking-wide text-center align-middle">${newsletter_sp_sub_title}</p>
         </div>
 
         <form 
@@ -207,7 +289,16 @@ class Product extends BasePage {
         modal.querySelector("div").classList.add("scale-100");
       });
 
+      const releaseDialog = this.openAccessibleDialog(modal, {
+        titleId: "newsletter_sp-title",
+        descriptionId: "newsletter_sp-description",
+        fallbackLabel: this.getLocalizedMessage("notify_dialog"),
+        initialFocus: "#mce-EMAIL-1",
+        requestClose: () => closeModal(),
+      });
+
       const closeModal = () => {
+        releaseDialog();
         modal.classList.add("opacity-0");
         modal.querySelector("div").classList.add("scale-90");
         setTimeout(() => modal.remove(), 400);
@@ -291,8 +382,11 @@ collections_offer() {
   const allowedCategories = window.collection_categories.value; // [1343313527]
   const productCategoryId = window.product_category_id; 
 
-  // Check localStorage first
-  const dontRemind = localStorage.getItem("collection_sp_modal_dont_remind");
+  // Check localStorage first (it can throw when the browser blocks site data: then the popup is simply shown)
+  let dontRemind = null;
+  try {
+    dontRemind = localStorage.getItem("collection_sp_modal_dont_remind");
+  } catch (error) {}
   if (dontRemind === "true") return; // Exit early
 
   // Check category
@@ -317,14 +411,14 @@ collections_offer() {
         <div class="w-[70px] h-[70px] mx-auto">
           <img src="${collection_add_image}" alt="" class="w-full h-auto"/>
         </div>
-        <button id="close-collection-modal" 
+        <button id="close-collection-modal" type="button" aria-label="${this.getLocalizedMessage("close")}" 
           class="absolute top-3 flex items-center justify-center right-3 font-bold w-[24px] h-[24px] text-[#71717B] transition">
-          <i class="sicon-cancel text-[16px] font-bold"></i>
+          <i class="sicon-cancel text-[16px] font-bold" aria-hidden="true"></i>
         </button>
 
         <div class="text-center mt-2 mb-10">
-          <h2 class="text-primary mb-1 font-semibold text-lg leading-7 tracking-normal text-center align-middle">${collection_sp_block_title}</h2>
-          <p class="text-[#71717B] font-medium text-sm leading-5 tracking-wide text-center align-middle">${collection_sp_sub_title}</p>
+          <h2 id="collection_sp-title" class="text-primary mb-1 font-semibold text-lg leading-7 tracking-normal text-center align-middle">${collection_sp_block_title}</h2>
+          <p id="collection_sp-description" class="text-[#71717B] font-medium text-sm leading-5 tracking-wide text-center align-middle">${collection_sp_sub_title}</p>
         </div>
 
         <p class="text-[#52525C] font-medium text-sm leading-5 tracking-wide text-center align-middle mb-4">${collection_sp_promo_title}</p>
@@ -355,9 +449,23 @@ collections_offer() {
     modalContent.classList.remove("scale-90", "opacity-0");
     modalContent.classList.add("scale-100", "opacity-100");
 
+    const releaseDialog = this.openAccessibleDialog(modal, {
+      titleId: "collection_sp-title",
+      descriptionId: "collection_sp-description",
+      fallbackLabel: this.getLocalizedMessage("offer_dialog"),
+      initialFocus: "#close-collection-modal",
+      requestClose: () => closeModal(),
+    });
+
     const closeModal = () => {
+      releaseDialog();
       const checkbox = document.getElementById("dont-remind-checkbox");
-      if (checkbox.checked) localStorage.setItem("collection_sp_modal_dont_remind", "true");
+      if (checkbox.checked) {
+        // A failing write must never keep the popup from closing
+        try {
+          localStorage.setItem("collection_sp_modal_dont_remind", "true");
+        } catch (error) {}
+      }
 
       modal.classList.remove("bg-black/40", "opacity-100");
       modal.classList.add("bg-black/0", "opacity-0");
