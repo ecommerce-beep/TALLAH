@@ -436,7 +436,7 @@ watchAndAdjustHeader() {
         <i class="sicon-cancel text-[16px]"></i>
       </button>
  <div class="w-[70px] h-[70px] mx-auto">
-        <img src="${window.add_image}" class="w-full h-auto"/>
+        <img src="${window.add_image}" alt="" class="w-full h-auto"/>
       </div>
       <div class="text-center mb-6">
         <h2 class="text-primary font-semibold text-lg">

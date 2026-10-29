@@ -335,7 +335,7 @@
                                         {% if item.rating.images|length %}
                                             <div class="flex items-center gap-2 mt-2">
                                                 {% for image in item.rating.images %}
-                                                    <img class="w-20 h-20 object-cover rounded-md" src="{{image}}"/>
+                                                    <img class="w-20 h-20 object-cover rounded-md" src="{{image}}" alt=""/>
                                                 {% endfor %}
                                             </div>
                                         {% endif %}

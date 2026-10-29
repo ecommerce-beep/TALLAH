@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
       item.innerHTML = `
         <a class="block px-4 py-2" tabindex="-1">
           <div class="flex gap-2 items-center space-x-4">
-            <img src="${product.image.url}" alt="${product.name}" class="w-10 h-10 object-cover " />
+            <img src="${product.image.url}" alt="" class="w-10 h-10 object-cover " />
             <div>
               <p class="text-sm font-medium">${product.name}</p>
               <p class="text-xs text-gray-500">${getPriceHtml(product)}</p>

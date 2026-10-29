@@ -385,13 +385,13 @@ Global Variables (from Theme)
 							<img
 									src="{{ store.logo }}"
 									class="logo-primary w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
-									alt="{{ store.name }}"
+									alt=""
 								>
 
 								<img
 									src="{{ another_logo_img }}"
 									class="logo-secondary absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-									alt="{{ store.name }} alternate logo"
+									alt=""
 								>
 
 
@@ -405,7 +405,7 @@ Global Variables (from Theme)
 							height="100%"
 							loading="eager"
 							src="{{ store.logo }}"
-							alt="{{ store.name }} logo"
+							alt=""
 						>
 
 					{% endif %}
@@ -498,7 +498,7 @@ Global Variables (from Theme)
 			{# LOGO SECTION #}
 			<div class="flex w-[66px] h-[36px] p-[8px_0px] flex-col justify-center items-center gap-[12px] shrink-0 t py-5 px-3" style="color: {{ initial_text }};">
 				<a class="navbar-brand" href="{{ store.url }}">
-					<img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo }}" alt="{{ store.name }} logo">
+					<img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo }}" alt="">
 					{% if is_page('index') %}
 						<h1 class="sr-only">{{ store.name }}</h1>
 					{% else %}
@@ -683,11 +683,11 @@ Global Variables (from Theme)
 										{% if image != '' %}
 											{% if link %}
 												<a href="{{ link }}" class="bg-gray-100 aspect-[4/3] flex items-center justify-center overflow-hidden">
-													<img src="{{ image }}" alt="Category" class="object-cover w-full h-full">
+													<img src="{{ image }}" alt="{{ trans('blocks.header.featured_categories') }}" class="object-cover w-full h-full">
 												</a>
 											{% else %}
 												<div class="bg-gray-100 aspect-[4/3] flex items-center justify-center overflow-hidden">
-													<img src="{{ image }}" alt="Category" class="object-cover w-full h-full">
+													<img src="{{ image }}" alt="" class="object-cover w-full h-full">
 												</div>
 											{% endif %}
 										{% endif %}

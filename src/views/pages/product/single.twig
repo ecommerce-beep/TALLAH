@@ -114,14 +114,14 @@
 					{% endif %}">
 						{% for image in product.images %}
 							{% if image.three_d_image_url %}
-								<model-viewer style="min-height: 500px;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt }}"></model-viewer>
+								<model-viewer style="min-height: 500px;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt|trim ? image.alt : product.name }}"></model-viewer>
 							{% else %}
 								<a data-fslightbox="product_{{ product.id }}" data-img-id="{{ image.id }}" data-slid-index="{{ loop.index-1 }}" {% if image.video_url %} data-video-src="{{ image.video_url }}" {% endif %} data-caption="{{ image.alt }}" data-infinite="false" data-type="{{ image.video_url?'youtube':'image' }}" href="{{ (image.video_url is iterable ? image.video_url|first : image.video_url)|default(image.url) }}" aria-label="{{ product.name }}" 
 									class=" {% if not has_many_images %} col-span-2 {% endif %} img_items swiper-slide magnify-wrapper homeslider__slide  {{ image.video_url?'video-entry':'' }}  rounded-3xl">
 									{% if loop.first %}
-										<img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt }}" class="w-full h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
+										<img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : product.name }}" class="w-full h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
 									{% else %}
-										<img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt }}" class="w-full lazy h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
+										<img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : product.name }}" class="w-full lazy h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
 									{% endif %}
 								</a>
 							{% endif %}
@@ -169,14 +169,14 @@
                             <div slot="items">
                                 {% for image in product.images %}
                                     {% if image.three_d_image_url %}
-                                        <model-viewer style="min-height: 500px;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt }}"></model-viewer>
+                                        <model-viewer style="min-height: 500px;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt|trim ? image.alt : product.name }}"></model-viewer>
                                     {% else %}
                                         <a data-fslightbox="product_{{ product.id }}" data-img-id="{{ image.id }}" data-slid-index="{{ loop.index-1 }}" {% if image.video_url %} data-video-src="{{ image.video_url }}" {% endif %} data-caption="{{ image.alt }}" data-infinite="false" data-type="{{ image.video_url?'youtube':'image' }}" href="{{ (image.video_url is iterable ? image.video_url|first : image.video_url)|default(image.url) }}" aria-label="{{ product.name }}" 
                                             class=" img_items swiper-slide magnify-wrapper homeslider__slide  {{ image.video_url?'video-entry':'' }}  rounded-3xl">
                                             {% if loop.first %}
-                                                <img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt }}" class="w-full h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
+                                                <img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : product.name }}" class="w-full h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
                                             {% else %}
-                                                <img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt }}" class="w-full lazy h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
+                                                <img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : product.name }}" class="w-full lazy h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
                                             {% endif %}
                                         </a>
                                     {% endif %}
@@ -234,14 +234,14 @@
                             <div slot="items">
                                 {% for image in product.images %}
                                     {% if image.three_d_image_url %}
-                                        <model-viewer style="min-height: 500px;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt }}"></model-viewer>
+                                        <model-viewer style="min-height: 500px;" class="swiper-slide model-entry w-full h-full" loading="eager" camera-controls touch-action="pan-y" auto-rotate poster="{{ image.url }}" src="{{ image.three_d_image_url }}" shadow-intensity="1" alt="{{ image.alt|trim ? image.alt : product.name }}"></model-viewer>
                                     {% else %}
                                         <a data-fslightbox="product_{{ product.id }}" data-img-id="{{ image.id }}" data-slid-index="{{ loop.index-1 }}" {% if image.video_url %} data-video-src="{{ image.video_url }}" {% endif %} data-caption="{{ image.alt }}" data-infinite="false" data-type="{{ image.video_url?'youtube':'image' }}" href="{{ (image.video_url is iterable ? image.video_url|first : image.video_url)|default(image.url) }}" aria-label="{{ product.name }}" 
                                             class=" img_items swiper-slide magnify-wrapper homeslider__slide  {{ image.video_url?'video-entry':'' }}  rounded-3xl">
                                             {% if loop.first %}
-                                                <img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt }}" class="w-full h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
+                                                <img id="{{image.id}}" fetchpriority="high" loading="eager" src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : product.name }}" class="w-full h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
                                             {% else %}
-                                                <img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt }}" class="w-full lazy h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
+                                                <img id="{{image.id}}" src="{{ 'images/s-empty.png' | cdn }}" data-src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : product.name }}" class="w-full lazy h-full  object-{{ theme.settings.get('slider_background_size') }} w-full {{ image.three_d_image_url ? 'model-poster' : '' }}">
                                             {% endif %}
                                         </a>
                                     {% endif %}
@@ -253,9 +253,9 @@
                                     {% for image in product.images %}
                                         <div class="slide--one-fourth {{ image.video_url?'video-entry':'' }} {{ image.three_d_image_url?'model-entry':'' }}" data-caption="{{ image.alt }}">
                                             {% if loop.index == 1 %}
-                                                <img src="{{ image.url }}" loading="eager" class="object-cover w-full h-full bg-gray-100 overflow-hidden" title="{{ image.alt }}" alt="{{ image.alt }}"/>
+                                                <img src="{{ image.url }}" loading="eager" class="object-cover w-full h-full bg-gray-100 overflow-hidden" title="{{ image.alt }}" alt="{{ image.alt|trim ? image.alt : product.name }}"/>
                                             {% else %}
-                                                <img data-src="{{ image.url }}" src="{{ 'images/s-empty.png' | cdn }}" class="object-cover w-full h-full lazy bg-gray-100  overflow-hidden" title="{{ image.alt }}" alt="{{ image.alt }}"/>
+                                                <img data-src="{{ image.url }}" src="{{ 'images/s-empty.png' | cdn }}" class="object-cover w-full h-full lazy bg-gray-100  overflow-hidden" title="{{ image.alt }}" alt="{{ image.alt|trim ? image.alt : product.name }}"/>
                                             {% endif %}
                                         </div>
                                     {% endfor %}
@@ -596,7 +596,7 @@
           {# image #}
           {% if point['selling-point-image'] %}
           <img src="{{ point['selling-point-image'] }}"
-            alt="{% if language.iso_code == 'ar' %}{{ point['selling-point-title']['ar']|default('') }}{% else %}{{ point['selling-point-title']['en']|default('') }}{% endif %}"
+            alt=""
             class="w-8 h-8 aspect-square" />
           {% endif %}
 
@@ -653,7 +653,7 @@
           {% if point['selling-point-image'] %}
           <div class="flex-shrink-0">
             <img src="{{ point['selling-point-image'] }}"
-              alt="{% if language.iso_code == 'ar' %}{{ point['selling-point-title']['ar']|default('') }}{% else %}{{ point['selling-point-title']['en']|default('') }}{% endif %}"
+              alt=""
               class="w-8 h-8 aspect-square" />
           </div>
           {% endif %}
@@ -710,7 +710,7 @@
           {# image #}
           {% if point['selling-point-image'] %}
           <img src="{{ point['selling-point-image'] }}"
-            alt="{% if language.iso_code == 'ar' %}{{ point['selling-point-title']['ar']|default('') }}{% else %}{{ point['selling-point-title']['en']|default('') }}{% endif %}"
+            alt=""
             class="w-8 h-8 aspect-square" />
           {% endif %}
 

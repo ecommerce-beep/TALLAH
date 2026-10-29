@@ -10,13 +10,13 @@
     <div class="container">
         <a href="{{ url }}" class="banner banner--fixed overflow-hidden">
 			{% if position == 0 %}
-				<img width="1200" height="300" src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : 'fixed banner' }}" fetchpriority="high"/>
+				<img width="1200" height="300" src="{{ image.url }}" alt="{{ image.alt|trim ? image.alt : store.name }}" fetchpriority="high"/>
 			{% else %}
 				<img width="1200" height="300"
 					src="{{ 'images/s-empty-wide.png' | asset }}"
 					data-src="{{ image.url }}"
 					class="lazy"
-					alt="{{ image.alt|trim ? image.alt : 'fixed banner' }}"/>
+					alt="{{ image.alt|trim ? image.alt : store.name }}"/>
 			{% endif %}
         </a>
     </div>
