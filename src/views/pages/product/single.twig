@@ -197,7 +197,8 @@
 								slider-config='{
 									"autoplay": {
 										"delay": 3000,
-										"disableOnInteraction": false
+										"disableOnInteraction": false{% if theme.settings.get('imageZoom') %},
+										"pauseOnMouseEnter": true{% endif %}
 									}
 								}'
 								{% endif %}
