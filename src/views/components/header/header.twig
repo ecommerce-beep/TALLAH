@@ -307,14 +307,14 @@ Global Variables (from Theme)
 			<div
 				class="flex flex-1 justify-end items-center md:gap-6 gap-2">
 				{# Search Toggle Button #}
-				<button id="search-toggle" class="flex items-center justify-center" aria-label="{{ trans('blocks.header.open_search') }}" aria-expanded="false" aria-controls="search-panel">
+				<button data-search-toggle class="flex items-center justify-center" aria-label="{{ trans('blocks.header.open_search') }}" aria-expanded="false" aria-controls="search-panel">
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewbox="0 0 20 20">
-						<g clip-path="url(#clip0)">
+						<g clip-path="url(#clip0-1)">
 							<path d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 							<path d="M17.5 17.5L13.875 13.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 						</g>
 						<defs>
-							<clipPath id="clip0">
+							<clipPath id="clip0-1">
 								<rect width="20" height="20" fill="white"/>
 							</clipPath>
 						</defs>
@@ -327,12 +327,12 @@ Global Variables (from Theme)
 				{% else %}
 					<button onclick="salla.event.dispatch('login::open')" class="flex items-center justify-center cursor-pointer">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
-							<g clip-path="url(#clip0_5899_2043)">
+							<g clip-path="url(#clip0_5899_2043-2)">
 								<path d="M16.6673 17.5V15.8333C16.6673 14.9493 16.3161 14.1014 15.691 13.4763C15.0659 12.8512 14.218 12.5 13.334 12.5H6.66732C5.78326 12.5 4.93542 12.8512 4.31029 13.4763C3.68517 14.1014 3.33398 14.9493 3.33398 15.8333V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								<path d="M9.99935 9.16667C11.8403 9.16667 13.3327 7.67428 13.3327 5.83333C13.3327 3.99238 11.8403 2.5 9.99935 2.5C8.1584 2.5 6.66602 3.99238 6.66602 5.83333C6.66602 7.67428 8.1584 9.16667 9.99935 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 							</g>
 							<defs>
-								<clipPath id="clip0_5899_2043">
+								<clipPath id="clip0_5899_2043-2">
 									<rect width="20" height="20" fill="white"/>
 								</clipPath>
 							</defs>
@@ -447,12 +447,12 @@ Global Variables (from Theme)
 				{% else %}
 					<button onclick="salla.event.dispatch('login::open')" class="flex items-center justify-center cursor-pointer">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
-							<g clip-path="url(#clip0_5899_2043)">
+							<g clip-path="url(#clip0_5899_2043-3)">
 								<path d="M16.6673 17.5V15.8333C16.6673 14.9493 16.3161 14.1014 15.691 13.4763C15.0659 12.8512 14.218 12.5 13.334 12.5H6.66732C5.78326 12.5 4.93542 12.8512 4.31029 13.4763C3.68517 14.1014 3.33398 14.9493 3.33398 15.8333V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								<path d="M9.99935 9.16667C11.8403 9.16667 13.3327 7.67428 13.3327 5.83333C13.3327 3.99238 11.8403 2.5 9.99935 2.5C8.1584 2.5 6.66602 3.99238 6.66602 5.83333C6.66602 7.67428 8.1584 9.16667 9.99935 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 							</g>
 							<defs>
-								<clipPath id="clip0_5899_2043">
+								<clipPath id="clip0_5899_2043-3">
 									<rect width="20" height="20" fill="white"/>
 								</clipPath>
 							</defs>
@@ -520,12 +520,12 @@ Global Variables (from Theme)
 
 					<!-- Close icon (same for both languages) -->
 					<svg id="icon-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-						<g clip-path="url(#clip0)">
+						<g clip-path="url(#clip0-4)">
 							<path d="M15.625 4.375L4.375 15.625" stroke="#27272A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 							<path d="M15.625 15.625L4.375 4.375" stroke="#27272A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 						</g>
 						<defs>
-							<clipPath id="clip0">
+							<clipPath id="clip0-4">
 								<rect width="20" height="20" fill="white"/>
 							</clipPath>
 						</defs>
@@ -539,14 +539,14 @@ Global Variables (from Theme)
 				{% endif %}
 
 				{# Search Toggle Button #}
-				<button id="search-toggle" class="flex items-center justify-center" aria-label="{{ trans('blocks.header.open_search') }}" aria-expanded="false" aria-controls="search-panel">
+				<button data-search-toggle class="flex items-center justify-center" aria-label="{{ trans('blocks.header.open_search') }}" aria-expanded="false" aria-controls="search-panel">
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewbox="0 0 20 20">
-						<g clip-path="url(#clip0)">
+						<g clip-path="url(#clip0-5)">
 							<path d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 							<path d="M17.5 17.5L13.875 13.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 						</g>
 						<defs>
-							<clipPath id="clip0">
+							<clipPath id="clip0-5">
 								<rect width="20" height="20" fill="white"/>
 							</clipPath>
 						</defs>
@@ -596,12 +596,12 @@ Global Variables (from Theme)
 		<div class="mx-auto flex flex-col items-start gap-6 lg:gap-[32px] w-full max-w-full px-4 py-4 lg:w-[777px] lg:px-0 lg:py-6">
 			<div class="flex h-[40px] items-center self-stretch">
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
-					<g clip-path="url(#clip0_6813_1469)">
+					<g clip-path="url(#clip0_6813_1469-6)">
 						<path d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z" stroke="#9F9FA9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 						<path d="M17.5 17.5L13.875 13.875" stroke="#9F9FA9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					</g>
 					<defs>
-						<clipPath id="clip0_6813_1469">
+						<clipPath id="clip0_6813_1469-6">
 							<rect width="20" height="20" fill="white"/>
 						</clipPath>
 					</defs>
