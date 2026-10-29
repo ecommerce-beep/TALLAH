@@ -35,9 +35,9 @@
 
 								<div class="position {{ item.items_alignment == ['center'] ? 'text-center items-center' : item.items_alignment == ['start'] ? 'text-start items-start' : 'text-end items-end' }} flex flex-col sm:gap-4 gap-2">
 									{% if item.block_title %}
-									<h1 data-swiper-parallax="-700"
+									<h2 data-swiper-parallax="-700"
 										class="leading-snug blocktitle blocktitle-{{loop.index}} text-[clamp(1.5rem,1.0408rem+1.9592vw,3rem)] text-background font-medium transition-all duration-700 ease-in-out">
-										{{item.block_title}}</h1>
+										{{item.block_title}}</h2>
 									{% endif %}
 									{% if item.subtext %}
 									<p data-swiper-parallax="-500"

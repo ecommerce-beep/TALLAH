@@ -337,7 +337,7 @@
 				<div class="flex items-center justify-between pb-2 border-b border-[#E4E4E7] mb-4 ">
 					<div class="flex whitespace-nowrap gap-4 items-center">
 						<div class="{{ product.is_on_sale ? '' : 'hidden' }} space-x-2 rtl:space-x-reverse whitespace-nowrap">
-							<h4 class="text-primary font-bold text-2xl inline-block">{{product.sale_price|money}}</h4>
+							<span class="text-primary font-bold text-2xl inline-block">{{product.sale_price|money}}</span>
 							<span class="text-[#9F9FA9] text-xl line-through">{{product.regular_price|money}}</span>
 						</div>
 
@@ -345,9 +345,9 @@
 							{% if product.starting_price %}
 								<span class="">{{ trans('pages.products.starting_price') }}</span>
 							{% endif %}
-							<h2 class="font-bold text-xl lg:text-[28px] inline-block text-primary">
+							<span class="font-bold text-xl lg:text-[28px] inline-block text-primary">
 								{{product.starting_price ? product.starting_price|money : product.price|money }}
-							</h2>
+							</span>
 						</div>
 					</div>
 				</div>
@@ -464,7 +464,7 @@
 
 							<div class="flex whitespace-nowrap price-wrapper gap-4 items-center">
 								<div class="{{ product.is_on_sale ? '' : 'hidden' }} price_is_on_sale space-x-2 rtl:space-x-reverse whitespace-nowrap">
-									<h2 class="total-price text-primary font-bold text-2xl inline-block">{{product.sale_price|money}}</h2>
+									<span class="total-price text-primary font-bold text-2xl inline-block">{{product.sale_price|money}}</span>
 									<span class="before-price text-[#9F9FA9] text-xl line-through">{{product.regular_price|money}}</span>
 								</div>
 								
@@ -472,9 +472,9 @@
 									{% if product.starting_price %}
 										<span class="starting-price-title">{{ trans('pages.products.starting_price') }}</span>
 									{% endif %}
-									<h2 class="total-price font-bold text-xl inline-block text-primary">
+									<span class="total-price font-bold text-xl inline-block text-primary">
 										{{product.starting_price ? product.starting_price|money : product.price|money }}
-									</h2>
+									</span>
 								</div>
 							</div>
 
@@ -506,7 +506,7 @@
 										(
 											<div class="flex whitespace-nowrap gap-4 items-center sm:hidden">
 												<div class="{{ product.is_on_sale ? '' : 'hidden' }} space-x-2 rtl:space-x-reverse whitespace-nowrap flex">
-													<h4 class="font-medium text-sm leading-5 tracking-wide text-center text-background">{{product.sale_price|money}}</h4>
+													<span class="font-medium text-sm leading-5 tracking-wide text-center text-background">{{product.sale_price|money}}</span>
 													<span class="font-medium text-sm leading-5 tracking-wide text-center text-background line-through">{{product.regular_price|money}}</span>
 												</div>
 												
@@ -514,9 +514,9 @@
 													{% if product.starting_price %}
 													<span class="">{{ trans('pages.products.starting_price') }}</span>
 													{% endif %}
-													<h2 class="font-medium text-sm leading-5 tracking-wide text-center text-background">
+													<span class="font-medium text-sm leading-5 tracking-wide text-center text-background">
 														{{product.starting_price ? product.starting_price|money : product.price|money }}
-													</h2>
+													</span>
 												</div>
 											</div>
 											)
@@ -786,9 +786,9 @@
 		<div class="side_products pt-4 border-t border-t-[color-mix(in_srgb,var(--color-primary)15%,white)]">
 		<div class="w-full flex flex-col justify-center items-start text-center">
 			<span class=" flex items-center gap-2 overflow-hidden pb-4">
-				<h1 class="font-semibold text-base leading-6 tracking-normal">
+				<h2 class="font-semibold text-base leading-6 tracking-normal">
 				{{ trans('pages.single.selected') }}
-				</h1>
+				</h2>
 			</span>
 		</div>
 		<div class="products-fixed-slider-{{position}} relative">
@@ -901,9 +901,9 @@
 	<div class="single-product-slider rtl:mr-5 ltr:ml-5 lg:rtl:mr-10 lg:ltr:ml-10 overflow-x-hidden my-6">
 		<div class="w-full flex flex-col justify-start items-start text-start pb-3">
 			<span class=" flex items-center gap-2 overflow-hidden pb-4">
-				<h1 class="text-[clamp(1.375rem,1.1216rem+1.0811vw,2rem)] font-medium leading-[28px] text-font">
+				<h2 class="text-[clamp(1.375rem,1.1216rem+1.0811vw,2rem)] font-medium leading-[28px] text-font">
 				{{ trans('pages.single.similar') }}
-				</h1>
+				</h2>
 			</span>
 		</div>
 		<div class="products-fixed-slider-{{position}} relative">
