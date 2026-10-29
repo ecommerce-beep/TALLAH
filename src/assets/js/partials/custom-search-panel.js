@@ -212,11 +212,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
-   * Function to turn a product url into a link target, only http(s) urls are allowed
-   * @param {string} url - Product url returned by the API
+   * Function to turn a product or image url into a link target, only http(s) urls are allowed
+   * @param {string} url - Url returned by the API
    * @returns {string} - Absolute url, or an empty string when the value is missing or not http(s)
    */
   function getSafeProductUrl(url) {
+    if (!url) return ''; // A missing value must not fall back to the current page
     try {
       const parsed = new URL(url, window.location.href);
       return parsed.protocol === 'http:' || parsed.protocol === 'https:' ? parsed.href : '';
@@ -243,19 +244,38 @@ document.addEventListener('DOMContentLoaded', () => {
       item.setAttribute('aria-selected', 'false');
       item.className = 'hover:bg-gray-100';  // Apply styling (no cursor-pointer: the theme sets pointer-events:none on its children, which would disable the link)
       // The whole row is a real link (new tab, copy link...). It is not a tab stop: focus stays in the input
-      item.innerHTML = `
-        <a class="block px-4 py-2" tabindex="-1">
-          <div class="flex gap-2 items-center space-x-4">
-            <img src="${product.image.url}" alt="" class="w-10 h-10 object-cover " />
-            <div>
-              <p class="text-sm font-medium">${product.name}</p>
-              <p class="text-xs text-gray-500">${getPriceHtml(product)}</p>
-            </div>
-          </div>
-        </a>
-      `;
+      // Product data is API text: build the row with DOM APIs so name and image url are never parsed as HTML
+      const link = document.createElement('a');
+      link.className = 'block px-4 py-2';
+      link.tabIndex = -1;
       const safeUrl = getSafeProductUrl(product.url);
-      if (safeUrl) item.firstElementChild.href = safeUrl;
+      if (safeUrl) link.href = safeUrl;
+
+      const row = document.createElement('div');
+      row.className = 'flex gap-2 items-center space-x-4';
+
+      const safeImage = getSafeProductUrl(product.image?.url);
+      if (safeImage) {
+        const img = document.createElement('img');
+        img.src = safeImage;
+        img.alt = '';
+        img.className = 'w-10 h-10 object-cover ';
+        row.appendChild(img);
+      } else {
+        row.appendChild(Object.assign(document.createElement('span'), { className: 'w-10 h-10 shrink-0' })); // Keep the row layout when there is no usable image
+      }
+
+      const info = document.createElement('div');
+      const name = document.createElement('p');
+      name.className = 'text-sm font-medium';
+      name.textContent = product.name ?? '';
+      const price = document.createElement('p');
+      price.className = 'text-xs text-gray-500';
+      price.innerHTML = getPriceHtml(product); // Built only from validated numbers (salla.money) and theme translations
+      info.append(name, price);
+      row.appendChild(info);
+      link.appendChild(row);
+      item.appendChild(link);
       resultsList.appendChild(item); // Append the item to the results list
     });
 
