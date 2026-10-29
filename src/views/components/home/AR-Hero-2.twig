@@ -75,9 +75,11 @@
 .AR-hero-section-{{position}} .text-wrapper p{
 	color:{{component.subtext_color}};
 }
+{# Mobile scrim: a dark layer over the banner image, only when the text keeps its default light color #}
+{% set mobile_scrim = (component.block_title or component.subtext) and ((not component.block_title) or ((not component.blocktitle_color) or ((component.blocktitle_color|lower|trim) == '') or ((component.blocktitle_color|lower|trim) in ['#fff', '#ffffff']))) and ((not component.subtext) or ((not component.subtext_color) or ((component.subtext_color|lower|trim) == '') or ((component.subtext_color|lower|trim) in ['#fff', '#ffffff']))) %}
 /* Mobile */
 .AR-hero-section-{{position}} .banner {
-    background: url({{component.mobile_bg}}) center center / cover no-repeat;
+    background: {% if mobile_scrim %}linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), {% endif %}url({{component.mobile_bg}}) center center / cover no-repeat;
 }
 /* Desktop (default) */
 @media (min-width: 768px) {
@@ -86,4 +88,11 @@
     }
 }
 
+
+@media (max-width: 767px) {
+    /* thin (300) small text over an image is hard to read */
+    .AR-hero-section-{{position}} .subtext {
+        font-weight: 400;
+    }
+}
 </style>

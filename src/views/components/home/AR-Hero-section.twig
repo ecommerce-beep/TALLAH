@@ -107,9 +107,11 @@
 		color: {{item.subtext_color}};
 	}
 
+	{# Mobile scrim: a dark layer over the banner image, only when the text keeps its default light color #}
+	{% set mobile_scrim = (item.block_title or item.subtext) and ((not item.block_title) or ((not item.blocktitle_color) or ((item.blocktitle_color|lower|trim) == '') or ((item.blocktitle_color|lower|trim) in ['#fff', '#ffffff']))) and ((not item.subtext) or ((not item.subtext_color) or ((item.subtext_color|lower|trim) == '') or ((item.subtext_color|lower|trim) in ['#fff', '#ffffff']))) %}
 	/* Mobile */
 	.AR-slider-hero-section-{{position}} .banner-{{loop.index}} {
-		background: url({{item.mobile_bg}}) center center / cover no-repeat;
+		background: {% if mobile_scrim %}linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), {% endif %}url({{item.mobile_bg}}) center center / cover no-repeat;
 	}
 
 	{% if item.transparent_button %}
@@ -177,5 +179,16 @@
 	.AR-slider-hero-section .hero-autoplay-toggle[hidden],
 	.AR-slider-hero-section .hero-autoplay-toggle [hidden] {
 		display: none;
+	}
+
+	@media (max-width: 767px) {
+		/* thin (300) small text over an image is hard to read */
+		.AR-slider-hero-section .subtext {
+			font-weight: 400;
+		}
+		/* keep the pause/play button clear of a long bottom call to action */
+		.AR-slider-hero-section .hero-autoplay-toggle {
+			bottom: 1rem;
+		}
 	}
 </style>
