@@ -94,6 +94,8 @@
 						<salla-products-list class="flex-1 min-w-0" source="{{ page.slug }}" source-value="{{ page.id }}" {{ filters ?'filters-Results':'' }}></salla-products-list>
 					</div>
 					{% hook 'product:index.items.end' %}
+					{# Used by products.js to add a next step to the empty state of the list #}
+					<div id="empty-state-actions" hidden data-home-url="{{ link('/') }}" data-continue-label="{{ trans('pages.cart.continue_shopping') }}"></div>
 				</div>
 			</div>
 				{#
