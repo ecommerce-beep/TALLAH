@@ -393,17 +393,17 @@ collections_offer() {
       await customElements.whenDefined("salla-slider");
 
       // The Swiper instance is created after the component loads, so wait for it (bounded)
-      let swiper;
-      for (let attempt = 0; attempt < 20 && !swiper; attempt++) {
-        swiper = await slider.sliderInstance?.();
-        swiper || (await new Promise((resolve) => setTimeout(resolve, 250)));
+      let sliderApi;
+      for (let attempt = 0; attempt < 20 && !sliderApi; attempt++) {
+        sliderApi = await slider.sliderInstance?.();
+        sliderApi || (await new Promise((resolve) => setTimeout(resolve, 250)));
       }
 
       // Nothing to do when the slider has no autoplay (setting off or a single image)
-      if (!swiper?.autoplay || !swiper.params.autoplay) return;
+      if (!sliderApi?.autoplay || !sliderApi.params.autoplay) return;
 
       const applyMotionPreference = () =>
-        reducedMotion.matches ? swiper.autoplay.stop() : swiper.autoplay.start();
+        reducedMotion.matches ? sliderApi.autoplay.stop() : sliderApi.autoplay.start();
       applyMotionPreference();
       reducedMotion.addEventListener("change", applyMotionPreference);
     });

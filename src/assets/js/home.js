@@ -27,14 +27,14 @@ class Home extends BasePage {
             await customElements.whenDefined('salla-slider');
 
             // The Swiper instance is created after the component loads, so wait for it (bounded)
-            let swiper;
-            for (let attempt = 0; attempt < 20 && !swiper; attempt++) {
-                swiper = await slider.sliderInstance?.();
-                swiper || (await new Promise(resolve => setTimeout(resolve, 250)));
+            let sliderApi;
+            for (let attempt = 0; attempt < 20 && !sliderApi; attempt++) {
+                sliderApi = await slider.sliderInstance?.();
+                sliderApi || (await new Promise(resolve => setTimeout(resolve, 250)));
             }
 
             // No autoplay (single banner): keep the button hidden
-            if (!swiper?.autoplay || !swiper.params.autoplay || toggle.dataset.ready) {
+            if (!sliderApi?.autoplay || !sliderApi.params.autoplay || toggle.dataset.ready) {
                 return;
             }
             toggle.dataset.ready = 'true';
@@ -45,34 +45,34 @@ class Home extends BasePage {
             const iconPause = toggle.querySelector('.icon-pause');
             const iconPlay = toggle.querySelector('.icon-play');
             const render = () => {
-                const playing = swiper.autoplay.running;
+                const playing = sliderApi.autoplay.running;
                 toggle.setAttribute('aria-label', playing ? toggle.dataset.labelPause : toggle.dataset.labelPlay);
                 iconPause.toggleAttribute('hidden', !playing);
                 iconPlay.toggleAttribute('hidden', playing);
             };
 
             toggle.addEventListener('click', () => {
-                if (swiper.autoplay.running) {
+                if (sliderApi.autoplay.running) {
                     pausedByUser = true;
-                    swiper.autoplay.stop();
+                    sliderApi.autoplay.stop();
                 } else {
                     pausedByUser = false;
-                    swiper.autoplay.start();
+                    sliderApi.autoplay.start();
                 }
             });
 
-            swiper.on('autoplayStart', render);
-            swiper.on('autoplayStop', render);
+            sliderApi.on('autoplayStart', render);
+            sliderApi.on('autoplayStop', render);
 
             // Respect the system "reduce motion" setting on load and when it changes during the session
             const applyMotionPreference = () => {
                 if (reducedMotion.matches) {
-                    swiper.autoplay.stop();
+                    sliderApi.autoplay.stop();
                 } else if (!pausedByUser) {
-                    swiper.autoplay.start();
+                    sliderApi.autoplay.start();
                 }
             };
-            reducedMotion.matches && swiper.autoplay.stop();
+            reducedMotion.matches && sliderApi.autoplay.stop();
             reducedMotion.addEventListener('change', applyMotionPreference);
 
             render();
